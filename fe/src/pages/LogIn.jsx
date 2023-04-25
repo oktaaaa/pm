@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/NavBar";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const LogIn = () => {
+export default function LogIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const logInButton = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:3000/api/users/login", {
+        email,
+        password,
+      });
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <React.Fragment>
       <div className="row">
@@ -18,15 +37,21 @@ const LogIn = () => {
               <div className="border border-3 border-primary"></div>
               <div className="card bg-white">
                 <div className="card-body p-5">
-                  <form className="mb-3 mt-md-4">
+                  <form onSubmit={logInButton} className="mb-3 mt-md-4">
                     <h3 className="mb-5 text-center">
                       Please enter your login and password!
                     </h3>
                     <div className="mb-3">
-                      <label for="email" className="form-label fw-semibold">
+                      <label className="form-label fw-semibold">
                         Email address
                       </label>
-                      <input type="email" className="form-control" id="email" />
+                      <input 
+                        type="email" 
+                        className="form-control input" 
+                        id="email"
+                        value = {email}
+                        onChange = {(e) => setEmail(e.target.value)} 
+                        />
                     </div>
 
                     <div className="mb-3">
@@ -35,8 +60,10 @@ const LogIn = () => {
                       </label>
                       <input
                         type="password"
-                        className="form-control"
+                        className="form-control input"
                         id="password"
+                        value = {password}
+                        onChange = {(e) => setPassword(e.target.value)}
                       />
                     </div>
 
@@ -65,6 +92,4 @@ const LogIn = () => {
       </div>
     </React.Fragment>
   );
-};
-
-export default LogIn;
+}
