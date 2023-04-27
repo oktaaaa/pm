@@ -43,7 +43,7 @@ class UserController{
                 )
 
                 if (validPassword){
-                    const token = jwt.sign({ id: user._id, nipen: user.nipen, namaLengkap: user.namaLengkap, tglLahir: user.tglLahir, email }, jwtSecret,
+                    const token = jwt.sign({ id: user._id, email }, jwtSecret,
                         {
                           expiresIn: '2h', // 3hrs
                         })

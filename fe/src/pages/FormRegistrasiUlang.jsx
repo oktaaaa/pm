@@ -1,31 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import Navbar from "../components/NavBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/NavBar";
 import { Link } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
 import { LinkS } from "../styles/LinkStyle";
+import Form from "react-bootstrap/Form";
+import AsyncSelect from 'react-select/async';
 
-export default function FormCreateUnitPln() {
-  const [kode_unit, setKodeUnit] = useState("");
-  const [nama_unit, setNamaUnit] = useState("");
-  const navigate = useNavigate();
-
-  const createUnit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:3000/api/unitpln/create", {
-        kode_unit,
-        nama_unit,
-      });
-      navigate("/unitpln");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+export default function FormRegistrasiUlang() {
+  //button
+  
   return (
-    <>
+    <React.Fragment>
       <div className="row">
         <div className="col-lg-12">
           <Navbar />
@@ -92,7 +78,7 @@ export default function FormCreateUnitPln() {
                   <i className="fa-solid fa-table-list fa-lg"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
                     <Link
-                      to={`/registrasiulang`}
+                      to={`/registrasiulang/add`}
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Registrasi Ulang
@@ -118,41 +104,45 @@ export default function FormCreateUnitPln() {
           </div>
         </div>
 
-        <div className="columns mt-5 mx-5">
-          <div className="column is-half">
-            <form onSubmit={createUnit}>
-              <div className="mb-3">
-                <label className="form-label fw-semibold">Kode Unit</label>
-                <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    value={kode_unit}
-                    onChange={(e) => setKodeUnit(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="mb-3">
-                <label className="form-label fw-semibold">Nama Unit</label>
-                <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    value={nama_unit}
-                    onChange={(e) => setNamaUnit(e.target.value)}
-                  />
-                </div>
-              </div>
+        <div className="col-lg-8 col-md-8 p-5">
+          <h2 className="mb-4">Registrasi Ulang</h2>
+          <Form>
+            <Form.Group className="mb-4">
+              <Form.Label>
+                <strong>NIP</strong>
+              </Form.Label>
+              <Form.Control type="text" placeholder="Nomor Induk Pensiun" />
+            </Form.Group>
 
-              <div className="field">
-                <button type="submit" className="btn btn-primary fw-semibold">
-                  Save
-                </button>
-              </div>
-            </form>
+            <Form.Group className="mb-4">
+              <Form.Label>
+                <strong>Nama Lengkap</strong>
+              </Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+
+            <Form.Group className="mb-4">
+              <Form.Label>
+                <strong>Upload Foto Wajah dan KTP</strong>
+              </Form.Label>
+              <Form.Control type="file" />
+            </Form.Group>
+
+            <Form.Group className="mb-4">
+              <Form.Label>
+                <strong>Upload KTP</strong>
+              </Form.Label>
+              <Form.Control type="file" />
+            </Form.Group>
+          </Form>
+
+          <div className="field">
+            <button type="submit" className="btn btn-primary fw-semibold">
+              Submit
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }

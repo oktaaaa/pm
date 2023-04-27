@@ -5,6 +5,7 @@ const UnitPlnController = require('../controllers/unitPln')
 const PesertaPensiunController = require('../controllers/pesertaPensiun')
 const TanggunganController = require('../controllers/tanggungan')
 const UserController = require('../controllers/user')
+const RegistrasiUlangController = require('../controllers/registrasiulang')
 
 //user
 routes.post('/api/users/signup', UserController.createUser)
@@ -28,5 +29,7 @@ routes.delete('/api/pesertapensiun/:id', PesertaPensiunController.deletePesertaP
 
 //tanggungan
 routes.post('/api/tanggungan/create', TanggunganController.createTanggungan)
+
+//registrasi ulang
 
 module.exports = routes

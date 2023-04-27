@@ -37,10 +37,12 @@ export default function LogIn() {
               <div className="border border-3 border-primary"></div>
               <div className="card bg-white">
                 <div className="card-body p-5">
+
                   <form onSubmit={logInButton} className="mb-3 mt-md-4">
                     <h3 className="mb-5 text-center">
                       Please enter your login and password!
                     </h3>
+
                     <div className="mb-3">
                       <label className="form-label fw-semibold">
                         Email address
@@ -55,7 +57,7 @@ export default function LogIn() {
                     </div>
 
                     <div className="mb-3">
-                      <label for="password" className="form-label fw-semibold">
+                      <label className="form-label fw-semibold">
                         Password
                       </label>
                       <input
@@ -75,7 +77,9 @@ export default function LogIn() {
                         Login
                       </button>
                     </div>
+
                   </form>
+
                   <div>
                     <p className="mb-0 text-center">
                       Don't have an account?{" "}
@@ -84,6 +88,7 @@ export default function LogIn() {
                       </a>
                     </p>
                   </div>
+                  
                 </div>
               </div>
             </div>

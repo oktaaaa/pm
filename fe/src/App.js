@@ -9,6 +9,9 @@ import Tanggungan from './pages/Tanggungan';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import MainPage from './pages/MainPage';
+import RegistrasiUlang from './pages/RegistrasiUlang';
+import FormRegistrasiUlang from './pages/FormRegistrasiUlang';
+import Laporan from './pages/Laporan';
 
 function App() {
   return (
@@ -22,7 +25,10 @@ function App() {
           <Route path="unitpln" element={<UnitPln/>} />
           <Route path="unitpln/create" element={<FormCreateUnitPln/>} />
           <Route path="tanggungan" element = {<Tanggungan/>}/>
-          <Route path="tanggungan/create" element={<FormTanggungan/>} />
+          <Route path= "tanggungan/create" element={<FormTanggungan/>} />
+          <Route path= "registrasiulang" element= {<RegistrasiUlang/>} />
+          <Route path = "registrasiulang/add" element = {<FormRegistrasiUlang />} />
+          <Route path= "laporan" element = {<Laporan />} />
         </Routes>
       
     </BrowserRouter>
