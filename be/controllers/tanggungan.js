@@ -24,20 +24,19 @@ class TanggunganController{
         //     res.status(500).json(error)
         // }
 
-        const { nipen,
-            nama_pensiun} = req.body
+        const { nipen, nama_peserta} = req.body
 
-        const nipenExists = await PesertaPensiun.findOne().populate('nama_peserta')
+        const nipenExists = await PesertaPensiun.find({nama_peserta})
 
-        const id = await PesertaPensiun.find({nipen}).populate('_id')
+        const pesertaPensiun = await PesertaPensiun.find({})
         const tanggunganData = new Tanggungan({
-            nipen: id,
-            nama_pensiun: nipenExists,
+            nipen: pesertaPensiun._id,
+            nama_peserta: pesertaPensiun.namaLengkap,
             nik_tanggungan: req.body.nik_tanggungan,
-            nama_tanggungan: req.body.nama_tanggungan
+            nama_tanggungan: req.body.nama_tanggungan,
+            relasi: req.body.relasi
         })
-        console.log(id);
-        console.log(tanggunganData);
+        
         const saveTanggungan = await tanggunganData.save()
 
         if(saveTanggungan){

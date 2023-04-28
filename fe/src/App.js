@@ -12,6 +12,8 @@ import MainPage from './pages/MainPage';
 import RegistrasiUlang from './pages/RegistrasiUlang';
 import FormRegistrasiUlang from './pages/FormRegistrasiUlang';
 import Laporan from './pages/Laporan';
+import PesertaPensiun from './pages/PesertaPensiun';
+import FormPesertaPensiun from './pages/FormPesertaPensiun';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="signup" element = {<SignUp/>}/>
           <Route path="login" element = {<LogIn/>}/>
+          <Route path = "pesertapensiun" element = {<PesertaPensiun/>} />
+          <Route path = "pesertapensiun/create" element = {<FormPesertaPensiun/>} />
           <Route path="unitpln" element={<UnitPln/>} />
           <Route path="unitpln/create" element={<FormCreateUnitPln/>} />
           <Route path="tanggungan" element = {<Tanggungan/>}/>

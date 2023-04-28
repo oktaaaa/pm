@@ -6,8 +6,8 @@ const Tanggungan = mongoose.model('Tanggungan', {
         type: Schema.Types.ObjectId, ref: 'PesertaPensiun',
         required: true
     },
-    nama_pensiun:{
-        type: String,
+    nama_peserta:{
+        type: Schema.Types.ObjectId, ref: 'PesertaPensiun',
         required:true
     },
     nik_tanggungan:{

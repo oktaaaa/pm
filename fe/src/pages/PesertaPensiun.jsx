@@ -2,26 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import axios from "axios";
-import App from "../App";
-import Sidebar from "../components/Sidebar";
 import { LinkS } from "../styles/LinkStyle";
 
-export default function UnitPln() {
-  const [units, setUnit] = useState([]);
+export default function PesertaPensiun() {
+  const [pesertas, setPesertas] = useState([]);
 
   useEffect(() => {
-    getUnits();
+    getPesertas();
   }, []);
 
-  const getUnits = async () => {
-    const response = await axios.get("http://localhost:3000/api/unitpln");
-    setUnit(response.data);
+  const getPesertas = async () => {
+    const response = await axios.get("http://localhost:3000/api/pesertapensiun");
+    setPesertas(response.data);
   };
 
   const deleteUnit = async (id) => {
     try {
       await axios.delete(`http://localhost:3000/api/unitpln/${id}`);
-      getUnits();
+      getPesertas();
     } catch (error) {
       console.log(error);
     }
@@ -137,7 +135,7 @@ export default function UnitPln() {
               </thead>
   
               <tbody>
-                {units.map((unit, index) => (
+                {pesertas.map((unit, index) => (
                   <tr key={unit._id}>
                     <td>{unit._id}</td>
                     <td>{unit.kode_unit}</td>

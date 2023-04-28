@@ -5,7 +5,7 @@ import Select from "react-crud-table/build/Select";
 import Navbar from "../components/NavBar";
 import { LinkS } from "../styles/LinkStyle";
 
-export default function FormTanggungan() {
+export default function FormPesertaPensiun() {
   const options = [
     { value: "", label: "Pilih relasi dengan peserta pensiun" },
     { value: "Suami", label: "Suami" },
@@ -113,13 +113,11 @@ export default function FormTanggungan() {
           </div>
         </div>
 
-        <div className="col-lg-8 col-md-8 p-5">
-          <h2 className="mb-4">Form Tambah Data Tanggungan</h2>
-          <form className="">
-            <h4 className="mb-2">Cari NIPEN/Nama Pegawai</h4>
-
+        <div className="col-lg-10 col-md-8 p-5">
+          <h2 className="mb-4">Form Peserta Pensiun</h2>
+          <form className="mx-5">
             <div className="row">
-              <div className="form-group col-lg-6 mb-2">
+              <div className="form-group col-md-6 mb-2">
                 <label for="inputEmail4">NIPEN</label>
                 <input
                   type="email"
@@ -129,7 +127,23 @@ export default function FormTanggungan() {
                 />
               </div>
 
-              <div className="form-group col-lg-6 mb-2">
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputPassword4">Alamat Sekarang</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputPassword"
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputEmail4">Nama Peserta</label>
+                <input type="date" className="form-control" />
+              </div>
+
+              <div className="form-group col-md-6 mb-2">
                 <label for="inputPassword4">Nama Pegawai</label>
                 <input
                   type="password"
@@ -139,50 +153,105 @@ export default function FormTanggungan() {
               </div>
             </div>
 
-            <hr />
-
-            <h4>Input Tanggungan</h4>
-            <div className="form-row">
-              <div className="form-group col-lg-6 mb-2">
-                <label for="inputEmail4">NIK</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="inputEmail4"
-                  placeholder="No Induk Tanggungan"
-                />
+            <div className="row">
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputEmail4">Tanggal Lahir</label>
+                <input type="date" className="form-control" />
               </div>
-              <div className="form-group col-lg-6 mb-2">
-                <label for="inputPassword4">Tanggal Lahir</label>
+
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputPassword4">Nama Pegawai</label>
                 <input
-                  type="date"
+                  type="password"
                   className="form-control"
-                  id="inputPassword4"
-                  placeholder="Kode Pos"
+                  id="inputPassword"
                 />
               </div>
             </div>
 
-            <div className="form-row">
-              <div className="form-group col-lg-6 mb-2">
-                <label for="inputEmail4">Nama Lengkap</label>
-                <input type="email" className="form-control" id="inputEmail4" />
+            <div className="row">
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputEmail4">E-mail</label>
+                <input type="email" className="form-control" />
               </div>
-              <div className="form-group col-lg-6 mb-2">
-                <label for="inputPassword4">Relasi</label>
-                {/* <input type="password" className="form-control" id="inputPassword4"/> */}
-                <select
-                  value={relations}
-                  onChange={handleRelations}
-                  className="form-select"
-                >
-                  {options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-                <p>The relation is {relations}</p>
+
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputPassword4">Nama Pegawai</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="inputPassword"
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputEmail4">No HP</label>
+                <input type="date" className="form-control" />
+              </div>
+
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputPassword4">Nama Pegawai</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="inputPassword"
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputEmail4">Nama Peserta</label>
+                <input type="date" className="form-control" />
+              </div>
+
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputPassword4">Unit PLN</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="inputPassword"
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputEmail4">Nama Bank</label>
+                <input
+                  type="date"
+                  className="form-control"
+                />
+              </div>
+
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputPassword4">Nama Pegawai</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="inputPassword"
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputEmail4">No Rekening</label>
+                <input
+                  type="date"
+                  className="form-control"
+                />
+              </div>
+
+              <div className="form-group col-md-6 mb-2">
+                <label for="inputPassword4">Nama Pegawai</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="inputPassword"
+                />
               </div>
             </div>
 
