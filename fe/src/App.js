@@ -31,7 +31,7 @@ function App() {
           <Route path="tanggungan" element = {<Tanggungan/>}/>
           <Route path= "tanggungan/create" element={<FormTanggungan/>} />
           <Route path= "registrasiulang" element= {<RegistrasiUlang/>} />
-          <Route path = "registrasiulang/add" element = {<FormRegistrasiUlang />} />
+          <Route path = "registrasiulang/create" element = {<FormRegistrasiUlang />} />
           <Route path= "laporan" element = {<Laporan />} />
         </Routes>
       

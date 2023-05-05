@@ -1,11 +1,36 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Select from "react-crud-table/build/Select";
 import Navbar from "../components/NavBar";
 import { LinkS } from "../styles/LinkStyle";
+import { log } from "console";
 
 export default function FormTanggungan() {
+  const [namapeserta, setNamaPeserta] = useState([]);
+  const [nip, setNip] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  // const getPesertaById = async () => {
+  //   const response = await axios.get(
+  //     `http://localhost:3000/api/pesertapensiun/${id}`
+  //   );
+  //   setNamaPeserta(response.data.namapeserta);
+  //   setNip(response.data.nip);
+  // };
+
+  useEffect(() => {
+    // getPesertaById();
+    document.addEventListener("enter", keyEnterHandler, true);
+  }, []);
+
+  const keyEnterHandler = (e) => {
+    e.preventDefault()
+    console.log("user pressed" + e.key)
+  };
+
+  // options for relations
   const options = [
     { value: "", label: "Pilih relasi dengan peserta pensiun" },
     { value: "Suami", label: "Suami" },
@@ -18,6 +43,8 @@ export default function FormTanggungan() {
   const handleRelations = (event) => {
     setRelations(event.target.value);
   };
+
+  // enter handler
 
   return (
     <>
@@ -120,21 +147,21 @@ export default function FormTanggungan() {
 
             <div className="row">
               <div className="form-group col-lg-6 mb-2">
-                <label for="inputEmail4">NIPEN</label>
+                <label htmlFor="inputEmail4">NIP</label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  id="inputEmail4"
-                  placeholder="No Induk Pensiunan"
+                  id="nip"
+                  placeholder="No Induk Pensiun"
                 />
               </div>
 
               <div className="form-group col-lg-6 mb-2">
-                <label for="inputPassword4">Nama Pegawai</label>
+                <label htmlFor="inputPassword4">Nama Pegawai</label>
                 <input
-                  type="password"
+                  type="text"
                   className="form-control"
-                  id="inputPassword"
+                  id="namaPegawai"
                 />
               </div>
             </div>
@@ -144,32 +171,34 @@ export default function FormTanggungan() {
             <h4>Input Tanggungan</h4>
             <div className="form-row">
               <div className="form-group col-lg-6 mb-2">
-                <label for="inputEmail4">NIK</label>
+                <label htmlFor="Nik"
+                value={relations}
+                onChange={keyEnterHandler}>NIK</label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  id="inputEmail4"
+                  id="nik"
                   placeholder="No Induk Tanggungan"
                 />
               </div>
               <div className="form-group col-lg-6 mb-2">
-                <label for="inputPassword4">Tanggal Lahir</label>
+                <label htmlFor="tgllahir">Tanggal Lahir</label>
                 <input
                   type="date"
                   className="form-control"
-                  id="inputPassword4"
-                  placeholder="Kode Pos"
+                  id="tglLahir"
+                  placeholder="Tanggal Lahir"
                 />
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group col-lg-6 mb-2">
-                <label for="inputEmail4">Nama Lengkap</label>
-                <input type="email" className="form-control" id="inputEmail4" />
+                <label htmlFor="inputEmail4">Nama Lengkap</label>
+                <input type="text" className="form-control" id="namaLengkap" />
               </div>
               <div className="form-group col-lg-6 mb-2">
-                <label for="inputPassword4">Relasi</label>
+                <label htmlFor="relasi">Relasi</label>
                 {/* <input type="password" className="form-control" id="inputPassword4"/> */}
                 <select
                   value={relations}

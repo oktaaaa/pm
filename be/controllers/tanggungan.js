@@ -26,11 +26,12 @@ class TanggunganController{
 
         const { nipen, nama_peserta} = req.body
 
-        const nipenExists = await PesertaPensiun.find({nama_peserta})
+        // const nipenExists = await PesertaPensiun.find({nama_peserta})
 
-        const pesertaPensiun = await PesertaPensiun.find({})
+        const pesertaPensiun = await PesertaPensiun.find({"nipen": req.body.nipen})
+        console.log(pesertaPensiun);
         const tanggunganData = new Tanggungan({
-            nipen: pesertaPensiun._id,
+            nipen: pesertaPensiun.nipen,
             nama_peserta: pesertaPensiun.namaLengkap,
             nik_tanggungan: req.body.nik_tanggungan,
             nama_tanggungan: req.body.nama_tanggungan,

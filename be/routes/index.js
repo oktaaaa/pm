@@ -26,6 +26,7 @@ routes.get('/api/pesertapensiun', PesertaPensiunController.getPesertaPensiun)
 routes.get('/api/pesertapensiun/:id', PesertaPensiunController.getPesertaPensiunById)
 routes.put('/api/pesertapensiun/update/:id', PesertaPensiunController.updatePesertaPensiun)
 routes.delete('/api/pesertapensiun/:id', PesertaPensiunController.deletePesertaPensiun)
+routes.get('/api/peserta/:nipen', PesertaPensiunController.getNipen)
 
 //tanggungan
 routes.post('/api/tanggungan/create', TanggunganController.createTanggungan)
