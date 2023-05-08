@@ -19,6 +19,7 @@ routes.post('/api/unitpln/create', UnitPlnController.createUnitpln)
 routes.get('/api/unitpln/:id', UnitPlnController.getUnitPlnById)
 routes.put('/api/unitpln/update/:id', UnitPlnController.updateUnitPln)
 routes.delete('/api/unitpln/:id', UnitPlnController.deleteUnitPln)
+routes.get('/api/unitpln/:namaunit', UnitPlnController.searchUnit)
 
 //peserta pensiun
 routes.post('/api/pesertapensiun/create', PesertaPensiunController.createPesertaPensiun)

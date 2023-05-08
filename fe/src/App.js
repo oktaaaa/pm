@@ -14,11 +14,12 @@ import FormRegistrasiUlang from './pages/FormRegistrasiUlang';
 import Laporan from './pages/Laporan';
 import PesertaPensiun from './pages/PesertaPensiun';
 import FormPesertaPensiun from './pages/FormPesertaPensiun';
-
+import Sidebar from './components/Sidebar';
+import Navbar from './components/NavBar';
 function App() {
   return (
     <BrowserRouter>
-      
+    <Navbar/>
         <Routes>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/" element={<MainPage />} />

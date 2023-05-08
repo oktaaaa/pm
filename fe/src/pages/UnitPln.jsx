@@ -8,7 +8,7 @@ import { LinkS } from "../styles/LinkStyle";
 
 export default function UnitPln() {
   const [units, setUnit] = useState([]);
-  
+
   useEffect(() => {
     getUnits();
   }, []);
@@ -27,14 +27,20 @@ export default function UnitPln() {
     }
   };
 
+  const searchHandle = async (e) => {
+    let namaunit = e.target.value;
+    if (namaunit) {
+      let result = await fetch(`http://localhost:3000/api/unitpln/${namaunit}`);
+      result = await result.json();
+      if (result) {
+        setUnit(result);
+      }
+    } else {
+      getUnits();
+    }
+  };
   return (
     <>
-      <div className="row">
-        <div className="col-lg-12">
-          <Navbar />
-        </div>
-      </div>
-
       <div className="row flex-nowrap">
         <div className="bg-dark col-auto col-md-2 col-lg-2 min-vh-100 d-flex flex-column justify-content-between">
           <div className="bg-dark p-2">
@@ -122,6 +128,13 @@ export default function UnitPln() {
         </div>
 
         <div className="col-lg-8 col-sm-1 col-md-1 mt-5 justify-center">
+          <input
+            type=""
+            className="form-control mb-3 border border-dark"
+            placeholder="Ketik nama peserta"
+            // value={kode_unit}
+            onChange={searchHandle}
+          />
           <div className="column">
             <Link to={`create`} className="btn btn-primary">
               Add New
@@ -135,11 +148,11 @@ export default function UnitPln() {
                   <th>Actions</th>
                 </tr>
               </thead>
-  
+
               <tbody>
                 {units.map((unit, index) => (
                   <tr key={unit._id}>
-                    <td>{unit._id}</td>
+                    <td>{index + 1}</td>
                     <td>{unit.kode_unit}</td>
                     <td>{unit.nama_unit}</td>
                     <td>

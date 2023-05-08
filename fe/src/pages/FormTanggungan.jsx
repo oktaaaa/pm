@@ -8,29 +8,26 @@ import { log } from "console";
 
 export default function FormTanggungan() {
   const [namapeserta, setNamaPeserta] = useState([]);
-  const [nip, setNip] = useState([]);
+  const [nip, setNip] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // const getPesertaById = async () => {
-  //   const response = await axios.get(
-  //     `http://localhost:3000/api/pesertapensiun/${id}`
-  //   );
-  //   setNamaPeserta(response.data.namapeserta);
-  //   setNip(response.data.nip);
-  // };
-
-  useEffect(() => {
-    // getPesertaById();
-    document.addEventListener("enter", keyEnterHandler, true);
-  }, []);
-
-  const keyEnterHandler = (e) => {
-    e.preventDefault()
-    console.log("user pressed" + e.key)
+  
+  const getPesertaByNip = async () => {
+    const response = await axios.get(
+      `http://localhost:3000/api/peserta/${nip}`
+    );
+    setNamaPeserta(response.data[0].nama_peserta)
+    setNip(response.data.nip);
   };
 
-  // options for relations
+  // useEffect(() => {
+  //   getPesertaByNip();
+  // }, []);
+  // useEffect(() => {
+  //   getPesertaById();
+  // }, []);
+
   const options = [
     { value: "", label: "Pilih relasi dengan peserta pensiun" },
     { value: "Suami", label: "Suami" },
@@ -40,9 +37,25 @@ export default function FormTanggungan() {
 
   const [relations, setRelations] = useState("");
 
-  const handleRelations = (event) => {
-    setRelations(event.target.value);
+  const handleRelations = (e) => {
+    setRelations(e.target.value);
   };
+
+  const handleNip = (e) => {
+    setNip(e.target.value);
+  };
+
+  const keyEnterHandler = (e) => {
+    
+    if (e.key === "Enter") {
+      e.preventDefault();
+      console.log(nip);
+      // console.log(getPesertaByNip);
+      getPesertaByNip()
+    }
+  };
+
+  // options for relations
 
   // enter handler
 
@@ -143,26 +156,34 @@ export default function FormTanggungan() {
         <div className="col-lg-8 col-md-8 p-5">
           <h2 className="mb-4">Form Tambah Data Tanggungan</h2>
           <form className="">
-            <h4 className="mb-2">Cari NIPEN/Nama Pegawai</h4>
+            <h4 className="mb-2">Cari NIP/Nama Pegawai</h4>
 
             <div className="row">
               <div className="form-group col-lg-6 mb-2">
-                <label htmlFor="inputEmail4">NIP</label>
+                <label
+                  htmlFor="inputNIP"
+                  
+                >
+                  NIP
+                </label>
+
+                {/* <p>Nip adalah {nip}</p> */}
+
                 <input
                   type="text"
                   className="form-control"
                   id="nip"
+                  value={nip}
+                  onChange={handleNip}
+                  onKeyDown={keyEnterHandler}
                   placeholder="No Induk Pensiun"
                 />
               </div>
 
               <div className="form-group col-lg-6 mb-2">
                 <label htmlFor="inputPassword4">Nama Pegawai</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="namaPegawai"
-                />
+                <input type="text" className="form-control" id="namaPegawai" 
+                value = {namapeserta}/>
               </div>
             </div>
 
@@ -171,9 +192,7 @@ export default function FormTanggungan() {
             <h4>Input Tanggungan</h4>
             <div className="form-row">
               <div className="form-group col-lg-6 mb-2">
-                <label htmlFor="Nik"
-                value={relations}
-                onChange={keyEnterHandler}>NIK</label>
+                <label htmlFor="Nik">NIK</label>
                 <input
                   type="text"
                   className="form-control"

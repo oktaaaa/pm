@@ -26,12 +26,6 @@ export default function FormCreateUnitPln() {
 
   return (
     <>
-      <div className="row">
-        <div className="col-lg-12">
-          <Navbar />
-        </div>
-      </div>
-
       <div className="row flex-nowrap">
         <div className="bg-dark col-auto col-md-2 col-lg-2 min-vh-100 d-flex flex-column justify-content-between">
           <div className="bg-dark p-2">
@@ -118,31 +112,27 @@ export default function FormCreateUnitPln() {
           </div>
         </div>
 
-        <div className="columns mt-5 mx-5">
-          <div className="column is-half">
+        <div className="form-row">
+          <div className="form-group col-lg-6 mb-2">
             <form onSubmit={createUnit}>
-              <div className="mb-3">
-                <label className="form-label fw-semibold">Kode Unit</label>
-                <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    value={kode_unit}
-                    onChange={(e) => setKodeUnit(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="mb-3">
-                <label className="form-label fw-semibold">Nama Unit</label>
-                <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    value={nama_unit}
-                    onChange={(e) => setNamaUnit(e.target.value)}
-                  />
-                </div>
-              </div>
+              <label className="form-label fw-semibold">Kode Unit</label>
+
+              <input
+                type="text"
+                className="form-control"
+                value={kode_unit}
+                onChange={(e) => setKodeUnit(e.target.value)}
+              />
+
+              <div className="form-group col-lg-6 mb-2"></div>
+              <label className="form-label fw-semibold">Nama Unit</label>
+
+              <input
+                type="text"
+                className="form-control"
+                value={nama_unit}
+                onChange={(e) => setNamaUnit(e.target.value)}
+              />
 
               <div className="field">
                 <button type="submit" className="btn btn-primary fw-semibold">

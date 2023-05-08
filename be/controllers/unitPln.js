@@ -36,6 +36,17 @@ class UnitPlnController{
         
     }
 
+    // search by unit name
+    static async searchUnit (req, res){
+        try{
+            const unitpln = await UnitPLN.find(req.params.nama_unit)
+            res.status(200).json(unitpln)
+        }catch(error){
+            res.status(500).json(error)
+        }
+        
+    }
+
     // update just in case ehehehe
     static async updateUnitPln (req, res){
         try{
