@@ -6,13 +6,16 @@ import { LinkS } from "../styles/LinkStyle";
 
 export default function PesertaPensiun() {
   const [pesertas, setPesertas] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     getPesertas();
   }, []);
 
   const getPesertas = async () => {
-    const response = await axios.get("http://localhost:3000/api/pesertapensiun");
+    const response = await axios.get(
+      "http://localhost:3000/api/pesertapensiun"
+    );
     setPesertas(response.data);
   };
 
@@ -119,7 +122,15 @@ export default function PesertaPensiun() {
           </div>
         </div>
 
-        <div className="col-lg-8 col-sm-1 col-md-1 mt-5 justify-center">
+        <div className="col-lg-10 col-sm-1 col-md-1 mt-5 justify-center">
+          <input
+            type=""
+            className="form-control mb-3 border border-dark"
+            placeholder="Ketik nama peserta"
+            // value={kode_unit}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+
           <div className="column">
             <Link to={`create`} className="btn btn-primary">
               Add New
@@ -127,26 +138,42 @@ export default function PesertaPensiun() {
             <table className="table is-striped">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Kode Unit PLN</th>
-                  <th>Nama Unit</th>
-                  <th>Actions</th>
+                  <th>No</th>
+                  <th>NIPEN</th>
+                  <th>Nama Peserta</th>
+                  <th>Tgl Lahir</th>
+                  <th>Alamat</th>
+                  <th>No. HP</th>
+                  <th>E-mail</th>
+                  <th>Nama Bank</th>
+                  <th>No Rekening</th>
+                  <th>Besar MP</th>
+                  <th>Unit PLN</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
-  
+
               <tbody>
-                {pesertas.map((unit, index) => (
-                  <tr key={unit._id}>
-                    <td>{unit._id}</td>
-                    <td>{unit.kode_unit}</td>
-                    <td>{unit.nama_unit}</td>
+                {pesertas.filter((peserta)=> peserta.nama_peserta.toLowerCase().includes(query)).map((peserta, index) => (
+                  <tr key={peserta._id}>
+                    <td>{index + 1}</td>
+                    <td>{peserta.nipen}</td>
+                    <td>{peserta.nama_peserta}</td>
+                    <td>{peserta.tgl_lahir}</td>
+                    <td>{peserta.alamat}</td>
+                    <td>{peserta.no_hp}</td>
+                    <td>{peserta.email}</td>
+                    <td>{peserta.nama_bank}</td>
+                    <td>{peserta.no_rek}</td>
+                    <td>{peserta.besar_mp}</td>
+                    <td>{peserta.unit_pln}</td>
                     <td>
-                      <Link className="btn btn-primary m-2">Edit</Link>
+                      <Link className="btn btn-primary m-2">Ubah</Link>
                       <button
-                        onClick={() => deleteUnit(unit._id)}
+                        onClick={() => deleteUnit(peserta._id)}
                         className="btn btn-danger"
                       >
-                        Delete
+                        Hapus
                       </button>
                     </td>
                   </tr>

@@ -2,21 +2,44 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Select from "react-crud-table/build/Select";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import { LinkS } from "../styles/LinkStyle";
 
 export default function FormPesertaPensiun() {
-  const options = [
-    { value: "", label: "Pilih relasi dengan peserta pensiun" },
-    { value: "Suami", label: "Suami" },
-    { value: "Istri", label: "Istri" },
-    { value: "Anak", label: "Anak" },
-  ];
+  // variables
+  const [nipen, setNipen] = useState("");
+  const [nama_peserta, setNamaPeserta] = useState("");
+  const [tgl_lahir, setTglLahir] = useState("");
+  const [alamat, setAlamat] = useState("");
+  const [nohp, setNohp] = useState("");
+  const [email, setEmail] = useState("");
+  const [nama_bank, setNamaBank] = useState("");
+  const [no_rek, setNoRek] = useState("");
+  const [besar_mp, setBesarMp] = useState("");
+  const [unit_pln, setUnitPln] = useState("");
 
-  const [relations, setRelations] = useState("");
+  const navigate = useNavigate();
 
-  const handleRelations = (event) => {
-    setRelations(event.target.value);
+  const createPesertaPensiun = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:3000/api/pesertapensiun/create", {
+        nipen,
+        nama_peserta,
+        tgl_lahir,
+        alamat,
+        nohp,
+        email,
+        nama_bank,
+        no_rek,
+        besar_mp,
+        unit_pln
+      });
+      navigate("/pesertapensiun");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -117,146 +140,124 @@ export default function FormPesertaPensiun() {
           <h2 className="mb-4">Form Peserta Pensiun</h2>
           <form className="mx-5">
             <div className="row">
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputEmail4">NIPEN</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="inputEmail4"
-                  placeholder="No Induk Pensiunan"
-                />
-              </div>
-
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputPassword4">Alamat Sekarang</label>
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">NIPEN</label>
                 <input
                   type="text"
-                  className="form-control"
-                  id="inputPassword"
+                  className="form-control border border-dark"
+                  placeholder="No Induk Pensiunan"
+                  value={nipen}
+                  onChange={(e) => setNipen(e.target.value)}
                 />
               </div>
-            </div>
 
-            <div className="row">
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputEmail4">Nama Peserta</label>
-                <input type="date" className="form-control" />
-              </div>
-
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputPassword4">Nama Pegawai</label>
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">
+                  Nama Peserta Pensiun
+                </label>
                 <input
-                  type="password"
-                  className="form-control"
-                  id="inputPassword"
+                  type="text"
+                  className="form-control border border-dark"
+                  value={nama_peserta}
+                  onChange={(e) => setNamaPeserta(e.target.value)}
                 />
               </div>
             </div>
 
             <div className="row">
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputEmail4">Tanggal Lahir</label>
-                <input type="date" className="form-control" />
-              </div>
-
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputPassword4">Nama Pegawai</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="inputPassword"
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputEmail4">E-mail</label>
-                <input type="email" className="form-control" />
-              </div>
-
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputPassword4">Nama Pegawai</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="inputPassword"
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputEmail4">No HP</label>
-                <input type="date" className="form-control" />
-              </div>
-
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputPassword4">Nama Pegawai</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="inputPassword"
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputEmail4">Nama Peserta</label>
-                <input type="date" className="form-control" />
-              </div>
-
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputPassword4">Unit PLN</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="inputPassword"
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputEmail4">Nama Bank</label>
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">Tanggal Lahir</label>
                 <input
                   type="date"
-                  className="form-control"
+                  className="form-control border border-dark"
+                  value={tgl_lahir}
+                  onChange={(e) => setTglLahir(e.target.value)}
                 />
               </div>
 
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputPassword4">Nama Pegawai</label>
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">Alamat</label>
                 <input
-                  type="password"
-                  className="form-control"
-                  id="inputPassword"
+                  type="text"
+                  className="form-control border border-dark"
+                  value={alamat}
+                  onChange={(e) => setAlamat(e.target.value)}
                 />
               </div>
             </div>
 
             <div className="row">
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputEmail4">No Rekening</label>
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">No. HP</label>
                 <input
-                  type="date"
-                  className="form-control"
+                  type="text"
+                  className="form-control border border-dark"
+                  value={nohp}
+                  onChange={(e) => setNohp(e.target.value)}
                 />
               </div>
 
-              <div className="form-group col-md-6 mb-2">
-                <label for="inputPassword4">Nama Pegawai</label>
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">E-mail</label>
                 <input
-                  type="password"
-                  className="form-control"
-                  id="inputPassword"
+                  type="email"
+                  className="form-control border border-dark"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
 
+            <div className="row">
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">Nama Bank</label>
+                <input
+                  type="text"
+                  className="form-control border border-dark"
+                  value={nama_bank}
+                  onChange={(e) => setNamaBank(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">No Rekening</label>
+                <input
+                  type="text"
+                  className="form-control border border-dark"
+                  value={no_rek}
+                  onChange={(e) => setNoRek(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">
+                  Besar Manfaat Pensiun
+                </label>
+                <input
+                  type="text"
+                  className="form-control border border-dark"
+                  value={besar_mp}
+                  onChange={(e) => setBesarMp(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="form-group col-md-12 mb-2">
+              <label className="form-label fw-semibold">Unit PLN</label>
+              <input
+                type="text"
+                className="form-control border border-dark"
+                value={unit_pln}
+                onChange={(e) => setUnitPln(e.target.value)}
+              />
+            </div>
             <div className="">
-              <button type="submit" className="btn btn-primary my-3">
+              <button
+                type="submit"
+                className="btn btn-primary my-3 form-label fw-semibold"
+              >
                 Simpan
               </button>
             </div>

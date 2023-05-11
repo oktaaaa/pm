@@ -29,18 +29,18 @@ export default function UnitPln() {
     }
   };
 
-  const searchHandle = async (e) => {
-    let namaunit = e.target.value;
-    if (namaunit) {
-      let result = await fetch(`http://localhost:3000/api/unitpln/${namaunit}`);
-      result = await result.json();
-      if (result) {
-        setUnit(result);
-      }
-    } else {
-      getUnits();
-    }
-  };
+  // const searchHandle = async (e) => {
+  //   let namaunit = e.target.value;
+  //   if (namaunit) {
+  //     let result = await fetch(`http://localhost:3000/api/unitpln/${namaunit}`);
+  //     result = await result.json();
+  //     if (result) {
+  //       setUnit(result);
+  //     }
+  //   } else {
+  //     getUnits();
+  //   }
+  // };
   return (
     <>
       <div className="row flex-nowrap">

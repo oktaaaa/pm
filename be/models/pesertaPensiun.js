@@ -17,30 +17,6 @@ const PesertaPensiun = mongoose.model('PesertaPensiun', {
         type: String,
         required:true
     },
-    rt:{
-        type: String,
-        required:true
-    },
-    rw:{
-        type: String,
-        required:true
-    },
-    kecamatan:{
-        type: String,
-        required:true
-    },
-    kota:{
-        type: String,
-        required:true
-    },
-    kodepos:{
-        type: String,
-        required:true
-    },
-    provinsi:{
-        type: String,
-        required:true
-    },
     nohp:{
         type: String,
         required:true
@@ -49,7 +25,15 @@ const PesertaPensiun = mongoose.model('PesertaPensiun', {
         type: String,
         required:true
     },
-    npwp:{
+    nama_bank:{
+        type: String,
+        required:true
+    },
+    no_rek:{
+        type: String,
+        required:true
+    },
+    besar_mp:{
         type: String,
         required:true
     },

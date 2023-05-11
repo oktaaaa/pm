@@ -16,15 +16,11 @@ class PesertaPensiunController{
                 nama_peserta: req.body.nama_peserta,
                 tgl_lahir: req.body.tgl_lahir,
                 alamat: req.body.alamat,
-                rt: req.body.rt,
-                rw: req.body.rw,
-                kecamatan: req.body.kecamatan,
-                kota: req.body.kota,
-                kodepos: req.body.kodepos,
-                provinsi: req.body.provinsi,
                 nohp: req.body.nohp,
                 email: req.body.email,
-                npwp: req.body.npwp,
+                nama_bank:req.body.nama_bank,
+                no_rek: req.body.no_rek,
+                besar_mp: req.body.besar_mp,
                 unit_pln: req.body.unit_pln
             })
             const pesertasData = await pesertapensiun.save()

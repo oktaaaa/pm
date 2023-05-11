@@ -19,7 +19,7 @@ import Navbar from './components/NavBar';
 function App() {
   return (
     <BrowserRouter>
-    <Navbar/>
+    {/* <Navbar/> */}
         <Routes>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/" element={<MainPage />} />

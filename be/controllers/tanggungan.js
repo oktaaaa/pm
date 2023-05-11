@@ -38,6 +38,17 @@ class TanggunganController{
             res.status(500).json(error)
         }
     }
+
+    static async deleteTanggungan(req, res){
+        try{
+            const peserta = await Tanggungan.findByIdAndRemove(req.params.id)
+            res.status(200).json({
+                message: "Tanggungan Deleted"
+            })
+        }catch(error){
+            res.status(500).json(error)
+        }
+    }
 }
 
 module.exports = TanggunganController
