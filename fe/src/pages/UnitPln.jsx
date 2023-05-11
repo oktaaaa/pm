@@ -5,10 +5,12 @@ import axios from "axios";
 import App from "../App";
 import Sidebar from "../components/Sidebar";
 import { LinkS } from "../styles/LinkStyle";
+import { log } from "console";
 
 export default function UnitPln() {
   const [units, setUnit] = useState([]);
-
+  const [query, setQuery] = useState("")
+  
   useEffect(() => {
     getUnits();
   }, []);
@@ -131,9 +133,9 @@ export default function UnitPln() {
           <input
             type=""
             className="form-control mb-3 border border-dark"
-            placeholder="Ketik nama peserta"
+            placeholder="Ketik nama unit"
             // value={kode_unit}
-            onChange={searchHandle}
+            onChange={(e) => setQuery(e.target.value)}
           />
           <div className="column">
             <Link to={`create`} className="btn btn-primary">
@@ -150,7 +152,7 @@ export default function UnitPln() {
               </thead>
 
               <tbody>
-                {units.map((unit, index) => (
+                {units.filter((unit)=> unit.nama_unit.toLowerCase().includes(query)).map((unit, index) => (
                   <tr key={unit._id}>
                     <td>{index + 1}</td>
                     <td>{unit.kode_unit}</td>

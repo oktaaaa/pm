@@ -31,6 +31,7 @@ routes.get('/api/peserta/:nipen', PesertaPensiunController.getNipen)
 
 //tanggungan
 routes.post('/api/tanggungan/create', TanggunganController.createTanggungan)
+routes.get('/api/tanggungan', TanggunganController.getTanggungan)
 
 //registrasi ulang
 

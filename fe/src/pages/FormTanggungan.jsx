@@ -7,26 +7,41 @@ import { LinkS } from "../styles/LinkStyle";
 import { log } from "console";
 
 export default function FormTanggungan() {
-  const [namapeserta, setNamaPeserta] = useState([]);
-  const [nip, setNip] = useState("");
+  const [nipen, setNip] = useState("");
+  const [nama_peserta, setNamaPeserta] = useState("");
+
+  const [nik_tanggungan, setNikTanggungan] = useState("");
+  const [tgl_lahir, setTglLahirTanggungan] = useState("");
+  const [nama_tanggungan, setNamaTanggungan] = useState("");
+  const [relasi, setRelations] = useState("");
+
   const { id } = useParams();
   const navigate = useNavigate();
 
-  
+  //create tanggungan
+  const createTanggungan = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:3000/api/tanggungan/create", {
+        nipen,
+        nama_peserta,
+        nik_tanggungan,
+        tgl_lahir,
+        nama_tanggungan,
+        relasi,
+      });
+      navigate("/tanggungan");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const getPesertaByNip = async () => {
     const response = await axios.get(
-      `http://localhost:3000/api/peserta/${nip}`
+      `http://localhost:3000/api/peserta/${nipen}`
     );
-    setNamaPeserta(response.data[0].nama_peserta)
-    setNip(response.data.nip);
+    setNamaPeserta(response.data[0].nama_peserta);
+    setNip(response.data.nipen);
   };
-
-  // useEffect(() => {
-  //   getPesertaByNip();
-  // }, []);
-  // useEffect(() => {
-  //   getPesertaById();
-  // }, []);
 
   const options = [
     { value: "", label: "Pilih relasi dengan peserta pensiun" },
@@ -34,8 +49,6 @@ export default function FormTanggungan() {
     { value: "Istri", label: "Istri" },
     { value: "Anak", label: "Anak" },
   ];
-
-  const [relations, setRelations] = useState("");
 
   const handleRelations = (e) => {
     setRelations(e.target.value);
@@ -46,18 +59,13 @@ export default function FormTanggungan() {
   };
 
   const keyEnterHandler = (e) => {
-    
     if (e.key === "Enter") {
       e.preventDefault();
-      console.log(nip);
+      console.log(nipen);
       // console.log(getPesertaByNip);
-      getPesertaByNip()
+      getPesertaByNip();
     }
   };
-
-  // options for relations
-
-  // enter handler
 
   return (
     <>
@@ -155,17 +163,12 @@ export default function FormTanggungan() {
 
         <div className="col-lg-8 col-md-8 p-5">
           <h2 className="mb-4">Form Tambah Data Tanggungan</h2>
-          <form className="">
+          <form onSubmit={createTanggungan}>
             <h4 className="mb-2">Cari NIP/Nama Pegawai</h4>
 
             <div className="row">
               <div className="form-group col-lg-6 mb-2">
-                <label
-                  htmlFor="inputNIP"
-                  
-                >
-                  NIP
-                </label>
+                <label htmlFor="inputNIP">NIP</label>
 
                 {/* <p>Nip adalah {nip}</p> */}
 
@@ -173,7 +176,7 @@ export default function FormTanggungan() {
                   type="text"
                   className="form-control"
                   id="nip"
-                  value={nip}
+                  value={nipen}
                   onChange={handleNip}
                   onKeyDown={keyEnterHandler}
                   placeholder="No Induk Pensiun"
@@ -182,8 +185,13 @@ export default function FormTanggungan() {
 
               <div className="form-group col-lg-6 mb-2">
                 <label htmlFor="inputPassword4">Nama Pegawai</label>
-                <input type="text" className="form-control" id="namaPegawai" 
-                value = {namapeserta}/>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="namaPegawai"
+                  value={nama_peserta}
+                  onChange={(e) => setNamaPeserta(e.target.value)}
+                />
               </div>
             </div>
 
@@ -197,6 +205,8 @@ export default function FormTanggungan() {
                   type="text"
                   className="form-control"
                   id="nik"
+                  value={nik_tanggungan}
+                  onChange={(e) => setNikTanggungan(e.target.value)}
                   placeholder="No Induk Tanggungan"
                 />
               </div>
@@ -206,6 +216,8 @@ export default function FormTanggungan() {
                   type="date"
                   className="form-control"
                   id="tglLahir"
+                  value={tgl_lahir}
+                  onChange={(e) => setTglLahirTanggungan(e.target.value)}
                   placeholder="Tanggal Lahir"
                 />
               </div>
@@ -213,14 +225,20 @@ export default function FormTanggungan() {
 
             <div className="form-row">
               <div className="form-group col-lg-6 mb-2">
-                <label htmlFor="inputEmail4">Nama Lengkap</label>
-                <input type="text" className="form-control" id="namaLengkap" />
+                <label>Nama Lengkap</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="namaLengkap"
+                  value={nama_tanggungan}
+                  onChange={(e) => setNamaTanggungan(e.target.value)}
+                />
               </div>
               <div className="form-group col-lg-6 mb-2">
                 <label htmlFor="relasi">Relasi</label>
-                {/* <input type="password" className="form-control" id="inputPassword4"/> */}
+
                 <select
-                  value={relations}
+                  value={relasi}
                   onChange={handleRelations}
                   className="form-select"
                 >
@@ -230,7 +248,7 @@ export default function FormTanggungan() {
                     </option>
                   ))}
                 </select>
-                <p>The relation is {relations}</p>
+                <p>The relation is {relasi}</p>
               </div>
             </div>
 

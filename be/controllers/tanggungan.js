@@ -1,39 +1,22 @@
 const {Tanggungan} = require('../models/tanggungan')
 const PesertaPensiunController = require('../controllers/pesertaPensiun')
 const { PesertaPensiun } = require('../models/pesertaPensiun')
+const mongoose = require('mongoose')
+
 class TanggunganController{
     //create tanggungan
     static async createTanggungan (req, res){
-        // const tanggungan = new Tanggungan({
-        //     nipen: req.body.nipen,
-        //     nama_pensiun: req.body.nama_pensiun,
-        //     nik_tanggungan: req.body.nik_tanggungan,
-        //     nama_tanggungan: req.body.nama_tanggungan,
-        //     relasi: req.body.relasi
-        // })
-        // let nipen = tanggungan.nipen
-        // let nama_pensiun = tanggungan.nama_pensiun
-        // if(nipen){
-        //     nama_pensiun = PesertaPensiunController.nama_peserta
-        // }
-
-        // try{
-        //     const tanggunganData = await tanggungan.save()
-        //     res.status(200).json({message: 'Data Tanggunga Created'})
-        // } catch(error){
-        //     res.status(500).json(error)
-        // }
-
-        const { nipen, nama_peserta} = req.body
-
-        // const nipenExists = await PesertaPensiun.find({nama_peserta})
-
         const pesertaPensiun = await PesertaPensiun.find({"nipen": req.body.nipen})
         console.log(pesertaPensiun);
         const tanggunganData = new Tanggungan({
-            nipen: pesertaPensiun.nipen,
-            nama_peserta: pesertaPensiun.namaLengkap,
+            nipen: req.body.nipen,
+            nama_peserta: req.body.nama_peserta,
+
+            // nipen: pesertaPensiun.nipen,
+            // nip: mongoose.Types.ObjectId(pesertaPensiun.nip),
+            // nama_peserta: pesertaPensiun.nama_peserta,
             nik_tanggungan: req.body.nik_tanggungan,
+            tgl_lahir: req.body.tgl_lahir,
             nama_tanggungan: req.body.nama_tanggungan,
             relasi: req.body.relasi
         })
@@ -44,6 +27,15 @@ class TanggunganController{
             res.status(200)
         } else{
             res.status(500)
+        }
+    }
+
+    static async getTanggungan (req, res){
+        try{
+            const tanggungan = await Tanggungan.find()
+            res.status(200).json(tanggungan)
+        } catch (error){
+            res.status(500).json(error)
         }
     }
 }

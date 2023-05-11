@@ -14,6 +14,10 @@ const Tanggungan = mongoose.model('Tanggungan', {
         type: String,
         required:true
     },
+    tgl_lahir:{
+        type: Date,
+        required: true
+    },
     nama_tanggungan:{
         type: String,
         required:true
