@@ -40,7 +40,7 @@ export default function FormTanggungan() {
       `http://localhost:3000/api/peserta/${nipen}`
     );
     setNamaPeserta(response.data[0].nama_peserta);
-    setNip(response.data.nipen);
+    // setNip(response.data.nipen);
   };
 
   const options = [
@@ -177,7 +177,7 @@ export default function FormTanggungan() {
                   className="form-control"
                   id="nip"
                   value={nipen}
-                  onChange={handleNip}
+                  onChange={(e) => setNip(e.target.value)}
                   onKeyDown={keyEnterHandler}
                   placeholder="No Induk Pensiun"
                 />
@@ -252,11 +252,9 @@ export default function FormTanggungan() {
               </div>
             </div>
 
-            <div className="">
-              <button type="submit" className="btn btn-primary my-3">
-                Simpan
-              </button>
-            </div>
+            <button type="submit" className="btn btn-primary my-3">
+              Simpan
+            </button>
           </form>
         </div>
       </div>

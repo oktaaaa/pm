@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const Tanggungan = mongoose.model('Tanggungan', {
     nipen: {
-        type: Schema.Types.ObjectId, ref: 'PesertaPensiun',
+        type: String,
         required: true
     },
     nama_peserta:{
-        type: Schema.Types.ObjectId, ref: 'PesertaPensiun',
+        type: String,
         required:true
     },
     nik_tanggungan:{

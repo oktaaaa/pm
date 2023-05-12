@@ -16,6 +16,8 @@ import PesertaPensiun from './pages/PesertaPensiun';
 import FormPesertaPensiun from './pages/FormPesertaPensiun';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/NavBar';
+import Footer from './components/Footer';
+
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +37,7 @@ function App() {
           <Route path = "registrasiulang/create" element = {<FormRegistrasiUlang />} />
           <Route path= "laporan" element = {<Laporan />} />
         </Routes>
+      <Footer/>
       
     </BrowserRouter>
   )

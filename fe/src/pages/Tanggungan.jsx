@@ -111,7 +111,7 @@ export default function Tanggungan() {
                 {tanggungans.map((tanggungan, index) => (
                   <tr key={tanggungan._id}>
                     <td>{index + 1}</td>
-                    <td>{tanggungan.nip}</td>
+                    <td>{tanggungan.nipen}</td>
                     <td>{tanggungan.nama_peserta}</td>
                     <td>{tanggungan.nik_tanggungan}</td>
                     <td>{tanggungan.nama_tanggungan}</td>

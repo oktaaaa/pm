@@ -1,14 +1,12 @@
 import React from "react";
 
-
 const Navbar = () => {
   return (
-    
-        <div className='bg-primary col-lg-12 p-3'>
-            <div>
-            <h3 className='text-white'>IKPLN</h3>
-            </div>
-        </div>
+    <div className="bg-primary col-lg-12 p-2">
+      <div className="">
+        <img src="logo-ikpln.png" alt="" width="70px"/>
+      </div>
+    </div>
   );
 };
 
