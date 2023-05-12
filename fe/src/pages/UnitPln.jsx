@@ -29,6 +29,7 @@ export default function UnitPln() {
     }
   };
 
+  console.log(units.length)
   // const searchHandle = async (e) => {
   //   let namaunit = e.target.value;
   //   if (namaunit) {
@@ -152,6 +153,7 @@ export default function UnitPln() {
               </thead>
 
               <tbody>
+                
                 {units.filter((unit)=> unit.nama_unit.toLowerCase().includes(query)).map((unit, index) => (
                   <tr key={unit._id}>
                     <td>{index + 1}</td>

@@ -19,9 +19,9 @@ export default function PesertaPensiun() {
     setPesertas(response.data);
   };
 
-  const deleteUnit = async (id) => {
+  const deletePeserta = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/unitpln/${id}`);
+      await axios.delete(`http://localhost:3000/api/pesertapensiun/${id}`);
       getPesertas();
     } catch (error) {
       console.log(error);
@@ -170,7 +170,7 @@ export default function PesertaPensiun() {
                     <td>
                       <Link className="btn btn-primary m-2">Ubah</Link>
                       <button
-                        onClick={() => deleteUnit(peserta._id)}
+                        onClick={() => deletePeserta(peserta._id)}
                         className="btn btn-danger"
                       >
                         Hapus

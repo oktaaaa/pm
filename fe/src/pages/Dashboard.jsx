@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/NavBar";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import { LinkS } from "../styles/LinkStyle";
+import axios from "axios";
 
 const Dashboard = () => {
+  const [units, setUnit] = useState([]);
+  const [pesertas, setPesertas] = useState([]);
+  const [tanggungans, setTanggungans] = useState([]);
+
+  useEffect(() => {
+    getUnits();
+    getPesertas();
+    getTanggungans()
+  }, []);
+
+  const getUnits = async () => {
+    const response = await axios.get("http://localhost:3000/api/unitpln");
+    setUnit(response.data);
+  };
+
+  const getPesertas = async () => {
+    const response = await axios.get(
+      "http://localhost:3000/api/pesertapensiun"
+    );
+    setPesertas(response.data);
+  };
+
+  const getTanggungans = async () => {
+    const response = await axios.get("http://localhost:3000/api/tanggungan");
+    setTanggungans(response.data);
+  };
+
   return (
     <React.Fragment>
       <div className="row">
@@ -99,8 +127,50 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="p-3">
-          <h2>This is the the dashboard</h2>
+        {/* contents */}
+        <div className="p-3 col-md-10">
+          <h2>Dashboard</h2>
+          <div class="row p-3">
+            <div class="col-sm-3">
+              <div className="border border-3 border-primary"></div>
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Peserta Pensiun</h3>
+                  <h4 class="card-text">{pesertas.length}</h4>
+                  
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div className="border border-3 border-primary"></div>
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Unit PLN</h3>
+                  <h4 class="card-text">{units.length}</h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div className="border border-3 border-primary"></div>
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Tanggungan</h3>
+                  <h4 class="card-text">{tanggungans.length}</h4>
+                </div>
+              </div>
+            </div>
+            {/* <div class="col-sm-3">
+              <div className="border border-3 border-primary"></div>
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Registrasi Ulang</h3>
+                  <h4 class="card-text">1600</h4>
+                </div>
+              </div>
+            </div> */}
+          </div>
         </div>
       </div>
     </React.Fragment>

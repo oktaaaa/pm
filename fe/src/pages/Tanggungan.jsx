@@ -93,7 +93,7 @@ export default function Tanggungan() {
             <Link to={`create`} className="btn btn-primary">
               Add New
             </Link>
-            <table className="table is-striped">
+            <table className="table is-striped table-bordered">
               <thead>
                 <tr>
                   <th>Id</th>
