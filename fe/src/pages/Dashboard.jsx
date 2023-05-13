@@ -4,16 +4,63 @@ import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import { LinkS } from "../styles/LinkStyle";
 import axios from "axios";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+} from "chart.js";
+
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
 const Dashboard = () => {
   const [units, setUnit] = useState([]);
   const [pesertas, setPesertas] = useState([]);
   const [tanggungans, setTanggungans] = useState([]);
 
+  const data = {
+    labels: ["May 12", "", "May 13", "", "May 14", ""],
+    datasets: [
+      {
+        data: [8, 9, 6, 10, 8, 7],
+        backgroundColor: "transparent",
+        borderColor: "#f26c6d",
+        pointBorderColor: "transparent",
+        pointBorderWidth: 4,
+        tension: 0.5,
+      },
+    ],
+  };
+
+  const options = {
+    plugins: {
+      legend: false,
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        min: 2,
+        max: 10,
+        ticks: {
+          stepSize: 2,
+          callback: (value) => value + "K",
+        },
+        grid: {
+          borderDash: [10],
+        },
+      },
+    },
+  };
   useEffect(() => {
     getUnits();
     getPesertas();
-    getTanggungans()
+    getTanggungans();
   }, []);
 
   const getUnits = async () => {
@@ -137,7 +184,6 @@ const Dashboard = () => {
                 <div class="card-body">
                   <h3 class="card-title">Peserta Pensiun</h3>
                   <h4 class="card-text">{pesertas.length}</h4>
-                  
                 </div>
               </div>
             </div>
@@ -170,6 +216,11 @@ const Dashboard = () => {
                 </div>
               </div>
             </div> */}
+          </div>
+
+          <div className="row m-3">
+            <h4>Users Overview</h4>
+            <Line data={data} options={options}></Line>
           </div>
         </div>
       </div>

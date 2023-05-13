@@ -8,6 +8,7 @@ import { LinkS } from "../styles/LinkStyle";
 
 export default function FormPesertaPensiun() {
   // variables
+  const [tgl_pensiun, setTglPensiun] = useState("");
   const [nipen, setNipen] = useState("");
   const [nama_peserta, setNamaPeserta] = useState("");
   const [tgl_lahir, setTglLahir] = useState("");
@@ -25,6 +26,7 @@ export default function FormPesertaPensiun() {
     e.preventDefault();
     try {
       await axios.post("http://localhost:3000/api/pesertapensiun/create", {
+        tgl_pensiun,
         nipen,
         nama_peserta,
         tgl_lahir,
@@ -34,7 +36,7 @@ export default function FormPesertaPensiun() {
         nama_bank,
         no_rek,
         besar_mp,
-        unit_pln
+        unit_pln,
       });
       navigate("/pesertapensiun");
     } catch (error) {
@@ -138,8 +140,20 @@ export default function FormPesertaPensiun() {
 
         <div className="col-lg-10 col-md-8 p-5">
           <h2 className="mb-4">Form Peserta Pensiun</h2>
-          <form className="mx-5">
+          <form className="mx-5" onSubmit={createPesertaPensiun}>
             <div className="row">
+              <div className="form-group col-md-12 mb-2">
+                <label className="form-label fw-semibold">
+                  Tanggal Pensiun
+                </label>
+                <input
+                  type="date"
+                  className="form-control border border-dark"
+                  value={tgl_pensiun}
+                  onChange={(e) => setTglPensiun(e.target.value)}
+                />
+              </div>
+
               <div className="form-group col-md-12 mb-2">
                 <label className="form-label fw-semibold">NIPEN</label>
                 <input

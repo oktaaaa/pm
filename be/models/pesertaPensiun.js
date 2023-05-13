@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const PesertaPensiun = mongoose.model('PesertaPensiun', {
+    tgl_pensiun:{
+        type: Date,
+        required: true
+    },
     nipen:{
         type: String,
         required:true
@@ -40,7 +44,12 @@ const PesertaPensiun = mongoose.model('PesertaPensiun', {
     unit_pln:{
         type: String,
         required:true
+    },   
+    created_at:{
+        type: Date,
+        default: Date.now
     }
 })
+
 
 module.exports = { PesertaPensiun }

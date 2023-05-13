@@ -12,6 +12,7 @@ class PesertaPensiunController{
             }
 
             const pesertapensiun = new PesertaPensiun({
+                tgl_pensiun: req.body.tgl_pensiun,
                 nipen: req.body.nipen,
                 nama_peserta: req.body.nama_peserta,
                 tgl_lahir: req.body.tgl_lahir,

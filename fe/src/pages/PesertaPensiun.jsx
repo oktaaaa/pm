@@ -135,10 +135,11 @@ export default function PesertaPensiun() {
             <Link to={`create`} className="btn btn-primary">
               Add New
             </Link>
-            <table className="table is-striped">
+            <table className="table is-striped table-bordered">
               <thead>
                 <tr>
                   <th>No</th>
+                  <th>Tgl Pensiun</th>
                   <th>NIPEN</th>
                   <th>Nama Peserta</th>
                   <th>Tgl Lahir</th>
@@ -157,11 +158,12 @@ export default function PesertaPensiun() {
                 {pesertas.filter((peserta)=> peserta.nama_peserta.toLowerCase().includes(query)).map((peserta, index) => (
                   <tr key={peserta._id}>
                     <td>{index + 1}</td>
+                    <td>{peserta.tgl_pensiun}</td>
                     <td>{peserta.nipen}</td>
                     <td>{peserta.nama_peserta}</td>
                     <td>{peserta.tgl_lahir}</td>
                     <td>{peserta.alamat}</td>
-                    <td>{peserta.no_hp}</td>
+                    <td>{peserta.nohp}</td>
                     <td>{peserta.email}</td>
                     <td>{peserta.nama_bank}</td>
                     <td>{peserta.no_rek}</td>
