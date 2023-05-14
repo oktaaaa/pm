@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LinkS } from "../styles/LinkStyle";
+import Dropdown from "react-bootstrap/Dropdown";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
-export default function PesertaPensiun() {
+export default function LaporanStatus() {
   const [pesertas, setPesertas] = useState([]);
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     getPesertas();
@@ -19,17 +22,8 @@ export default function PesertaPensiun() {
     setPesertas(response.data);
   };
 
-  const deletePeserta = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3000/api/pesertapensiun/${id}`);
-      getPesertas();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <>
+    <React.Fragment>
       <div className="row">
         <div className="col-lg-12">
           <Navbar />
@@ -122,73 +116,55 @@ export default function PesertaPensiun() {
           </div>
         </div>
 
+        {/* contents */}
         <div className="col-lg-10 col-sm-1 col-md-1 mt-5 justify-center">
-          <input
-            type=""
-            className="form-control mb-3 border border-dark"
-            placeholder="Ketik nama peserta"
-            // value={kode_unit}
-            onChange={(e) => setQuery(e.target.value)}
-          />
+          <h2 className="text-center">Laporan</h2>
+          <div className="row">
+            <div className="col-lg-2">
+              <h5>Pilih laporan:</h5>
+            </div>
 
-          <div className="column">
-            <Link to={`create`} className="btn btn-primary">
-              Add New
-            </Link>
-            <table className="table is-striped table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Tgl Pensiun</th>
-                  <th>NIPEN</th>
-                  <th>Nama Peserta</th>
-                  <th>Tgl Lahir</th>
-                  <th>Alamat</th>
-                  <th>No. HP</th>
-                  <th>E-mail</th>
-                  <th>Nama Bank</th>
-                  <th>No Rekening</th>
-                  <th>Besar MP</th>
-                  <th>Unit PLN</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
+            <div className="col-lg-6">
+              <Dropdown className="p-2">
+                <Dropdown.Toggle id="dropdown-basic">Laporan</Dropdown.Toggle>
 
-              <tbody>
-                {pesertas
-                  .filter((peserta) =>
-                    peserta.nama_peserta.toLowerCase().includes(query)
-                  )
-                  .map((peserta, index) => (
-                    <tr key={peserta._id}>
-                      <td>{index + 1}</td>
-                      <td>{peserta.tgl_pensiun}</td>
-                      <td>{peserta.nipen}</td>
-                      <td>{peserta.nama_peserta}</td>
-                      <td>{peserta.tgl_lahir}</td>
-                      <td>{peserta.alamat}</td>
-                      <td>{peserta.nohp}</td>
-                      <td>{peserta.email}</td>
-                      <td>{peserta.nama_bank}</td>
-                      <td>{peserta.no_rek}</td>
-                      <td>{peserta.besar_mp}</td>
-                      <td>{peserta.unit_pln}</td>
-                      <td>
-                        <Link className="btn btn-primary m-2">Ubah</Link>
-                        <button
-                          onClick={() => deletePeserta(peserta._id)}
-                          className="btn btn-danger"
-                        >
-                          Hapus
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">
+                    Laporan Peserta
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-1">
+                    Laporan Status Peserta{" "}
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           </div>
+
+          <table className="table is-striped table-bordered">
+            <thead>
+              <tr>
+                <th>No</th>
+
+                <th>NIPEN</th>
+                <th>Nama Peserta</th>
+
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {pesertas.map((peserta, index) => (
+                <tr key={peserta._id}>
+                  <td>{index + 1}</td>
+                  <td>{peserta.nipen}</td>
+                  <td>{peserta.nama_peserta}</td>
+                  <td></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }

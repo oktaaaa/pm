@@ -9,7 +9,7 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 
-import { Calendar } from 'react-date-range';
+import { Calendar } from "react-date-range";
 
 export default function Laporan() {
   const [pesertas, setPesertas] = useState([]);
@@ -26,7 +26,7 @@ export default function Laporan() {
       "http://localhost:3000/api/pesertapensiun"
     );
     setPesertas(response.data);
-    setAllPesertas(response.data)
+    setAllPesertas(response.data);
   };
   const selectionRange = {
     startDate: startDate,
@@ -44,7 +44,7 @@ export default function Laporan() {
     });
     setStartDate(date.selection.startDate);
     setEndDate(date.selection.endDate);
-    setPesertas(filtered)
+    setPesertas(filtered);
   };
   return (
     <React.Fragment>
@@ -127,15 +127,12 @@ export default function Laporan() {
                 <a className="nav-link text-white">
                   <i className="fa-solid fa-file-lines fa-xl"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
-                    <Dropdown>
-                      <Dropdown.Toggle id="dropdown-basic">
-                        Laporan
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Pensiun</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
+                    <Link
+                      to={`/laporan`}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Laporan
+                    </Link>
                   </span>
                 </a>
               </li>
@@ -145,7 +142,18 @@ export default function Laporan() {
 
         {/* contents */}
         <div className="col-lg-10 col-sm-1 col-md-1 mt-5 justify-center">
-          <h2>This is the the laporan</h2>
+          <h2 className="text-center">Laporan</h2>
+          <p>Pilih laporan</p>
+          <Dropdown className="p-2">
+            <Dropdown.Toggle id="dropdown-basic">Laporan</Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Laporan Peserta</Dropdown.Item>
+              <Dropdown.Item href="#/action-1">
+                Laporan Status Peserta{" "}
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
           <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
           <table className="table is-striped table-bordered">
             <thead>
