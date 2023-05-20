@@ -138,7 +138,7 @@ export default function FormRegistrasiUlang() {
 
           <div className="field">
             <button type="submit" className="btn btn-primary fw-semibold">
-              Submit
+              Simpan
             </button>
           </div>
         </div>

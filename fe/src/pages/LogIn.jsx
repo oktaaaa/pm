@@ -40,12 +40,12 @@ export default function LogIn() {
 
                   <form onSubmit={logInButton} className="mb-3 mt-md-4">
                     <h3 className="mb-5 text-center">
-                      Please enter your login and password!
+                      Masukkan E-mail dan Password Anda
                     </h3>
 
                     <div className="mb-3">
                       <label className="form-label fw-semibold">
-                        Email address
+                        E-mail
                       </label>
                       <input 
                         type="email" 
@@ -74,7 +74,7 @@ export default function LogIn() {
                         className="btn btn-primary fw-semibold"
                         type="submit"
                       >
-                        Login
+                        Masuk
                       </button>
                     </div>
 
@@ -82,9 +82,9 @@ export default function LogIn() {
 
                   <div>
                     <p className="mb-0 text-center">
-                      Don't have an account?{" "}
+                      Tidak Ada Akun?{" "}
                       <a className="text-primary fw-bold">
-                        <Link to={`/signup`}>Sign Up</Link>
+                        <Link to={`/signup`}>Daftar</Link>
                       </a>
                     </p>
                   </div>

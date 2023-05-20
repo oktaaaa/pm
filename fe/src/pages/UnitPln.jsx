@@ -9,8 +9,8 @@ import { log } from "console";
 
 export default function UnitPln() {
   const [units, setUnit] = useState([]);
-  const [query, setQuery] = useState("")
-  
+  const [query, setQuery] = useState("");
+
   useEffect(() => {
     getUnits();
   }, []);
@@ -29,7 +29,6 @@ export default function UnitPln() {
     }
   };
 
-  console.log(units.length)
   // const searchHandle = async (e) => {
   //   let namaunit = e.target.value;
   //   if (namaunit) {
@@ -139,12 +138,12 @@ export default function UnitPln() {
             onChange={(e) => setQuery(e.target.value)}
           />
           <div className="column">
-            <Link to={`create`} className="btn btn-primary">
+            <Link to={`create`} className="btn btn-primary mb-5">
               Add New
             </Link>
-            <table className="table is-striped">
+            <table className="table is-striped table-bordered border-dark">
               <thead>
-                <tr>
+                <tr className="text-center">
                   <th>Id</th>
                   <th>Kode Unit PLN</th>
                   <th>Nama Unit</th>
@@ -153,23 +152,26 @@ export default function UnitPln() {
               </thead>
 
               <tbody>
-                
-                {units.filter((unit)=> unit.nama_unit.toLowerCase().includes(query)).map((unit, index) => (
-                  <tr key={unit._id}>
-                    <td>{index + 1}</td>
-                    <td>{unit.kode_unit}</td>
-                    <td>{unit.nama_unit}</td>
-                    <td>
-                      <Link className="btn btn-primary m-2">Edit</Link>
-                      <button
-                        onClick={() => deleteUnit(unit._id)}
-                        className="btn btn-danger"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {units
+                  .filter((unit) =>
+                    unit.nama_unit.toLowerCase().includes(query)
+                  )
+                  .map((unit, index) => (
+                    <tr key={unit._id}>
+                      <td className="text-center justify-content-center">
+                        {index + 1}
+                      </td>
+                      <td>{unit.kode_unit}</td>
+                      <td>{unit.nama_unit}</td>
+                      <td className="justify-content-center">
+                        <Link className="btn btn-primary m-2 fa-regular fa-pen-to-square"></Link>
+                        <button
+                          onClick={() => deleteUnit(unit._id)}
+                          className="btn btn-danger fa-solid fa-trash-can"
+                        ></button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

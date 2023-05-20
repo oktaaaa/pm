@@ -133,7 +133,7 @@ export default function PesertaPensiun() {
 
           <div className="column">
             <Link to={`create`} className="btn btn-primary">
-              Add New
+              Tambah Baru
             </Link>
             <table className="table is-striped table-bordered table-hover">
               <thead>

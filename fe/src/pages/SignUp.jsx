@@ -121,7 +121,7 @@ export default function SignUp() {
                         className="btn btn-primary fw-semibold"
                         type="submit"
                       >
-                        Sign Up
+                        Daftar
                       </button>
                     </div>
                   </form>

@@ -11,7 +11,7 @@ const MainPage = () => {
 
       <div className="col-lg-4 col-md-4 col-sm-4 col-4 mx-auto p-3 text-end">
         <button className="btn btn-light">
-          <Link to={`/login`}>Log in </Link>
+          <Link to={`/login`}>Masuk </Link>
         </button>
       </div>
     </div>

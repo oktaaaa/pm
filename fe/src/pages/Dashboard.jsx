@@ -1,62 +1,72 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/NavBar";
+// import Navbar from "../components/NavBar";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import { LinkS } from "../styles/LinkStyle";
 import axios from "axios";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import {
   Chart as ChartJS,
-  LineElement,
+  BarElement,
   CategoryScale,
   LinearScale,
   PointElement,
+  Tooltip,
+  Legend,
 } from "chart.js";
+import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  BarElement,
+  Tooltip,
+  Legend
+);
 
 const Dashboard = () => {
   const [units, setUnit] = useState([]);
   const [pesertas, setPesertas] = useState([]);
   const [tanggungans, setTanggungans] = useState([]);
+  const [chartData, setChartData] = useState({});
 
-  const data = {
-    labels: ["May 12", "", "May 13", "", "May 14", ""],
+  const getPesertas = async () => {
+    const response = await axios.get(
+      "http://localhost:3000/api/pesertapensiun"
+    );
+    setPesertas(response.data);
+  };
+
+  const unitPlnData = {
+    labels: units.map((unit) => unit.nama_unit),
     datasets: [
       {
-        data: [8, 9, 6, 10, 8, 7],
-        backgroundColor: "transparent",
-        borderColor: "#f26c6d",
-        pointBorderColor: "transparent",
-        pointBorderWidth: 4,
-        tension: 0.5,
+        label: "Unit PLN",
+        data: [units.map((unit) => unit.nama_unit).length],
+        backgroundColor: "#1AA7EC",
+        borderColor: "black",
+        borderWidth: 1,
       },
     ],
   };
 
-  const options = {
-    plugins: {
-      legend: false,
-    },
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
+  const pesertaPensiunData = {
+    labels: pesertas.map((peserta) => peserta.tgl_pensiun),
+    datasets: [
+      {
+        label: "Unit PLN",
+        data: [pesertas.map((peserta) => peserta.nipen).length],
+        backgroundColor: "#1AA7EC",
+        borderColor: "black",
+        borderWidth: 1,
       },
-      y: {
-        min: 2,
-        max: 10,
-        ticks: {
-          stepSize: 2,
-          callback: (value) => value + "K",
-        },
-        grid: {
-          borderDash: [10],
-        },
-      },
-    },
+    ],
   };
+
+  const options = {};
   useEffect(() => {
     getUnits();
     getPesertas();
@@ -68,13 +78,6 @@ const Dashboard = () => {
     setUnit(response.data);
   };
 
-  const getPesertas = async () => {
-    const response = await axios.get(
-      "http://localhost:3000/api/pesertapensiun"
-    );
-    setPesertas(response.data);
-  };
-
   const getTanggungans = async () => {
     const response = await axios.get("http://localhost:3000/api/tanggungan");
     setTanggungans(response.data);
@@ -84,7 +87,11 @@ const Dashboard = () => {
     <React.Fragment>
       <div className="row">
         <div className="col-lg-12">
-          <Navbar />
+          <DropdownButton id="dropdown-basic-button" title="Hi, User">
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </DropdownButton>
         </div>
       </div>
 
@@ -182,7 +189,7 @@ const Dashboard = () => {
               <div className="border border-3 border-primary"></div>
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title">Peserta Pensiun</h3>
+                  <h4 class="card-title">Peserta Pensiun</h4>
                   <h4 class="card-text">{pesertas.length}</h4>
                 </div>
               </div>
@@ -192,7 +199,7 @@ const Dashboard = () => {
               <div className="border border-3 border-primary"></div>
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title">Unit PLN</h3>
+                  <h4 class="card-title">Unit PLN</h4>
                   <h4 class="card-text">{units.length}</h4>
                 </div>
               </div>
@@ -202,25 +209,52 @@ const Dashboard = () => {
               <div className="border border-3 border-primary"></div>
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title">Tanggungan</h3>
-                  <h4 class="card-text">{tanggungans.length}</h4>
+                  <h4 class="card-title">Peserta Pensiun Aktif</h4>
+                  <h4 class="card-text"></h4>
                 </div>
               </div>
             </div>
-            {/* <div class="col-sm-3">
+            <div class="col-sm-3">
               <div className="border border-3 border-primary"></div>
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title">Registrasi Ulang</h3>
-                  <h4 class="card-text">1600</h4>
+                  <h4 class="card-title">Peserta Pensiun Non-Aktif</h4>
+                  <h4 class="card-text"></h4>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
 
           <div className="row m-3">
-            <h4>Users Overview</h4>
-            <Line data={data} options={options}></Line>
+            <div className="row">
+
+              {/* peserta pensiun */}
+              <div className="col-lg-6">
+                <h4 className="text-center">Peserta Pensiun</h4>
+                <Bar data={pesertaPensiunData} options={options}></Bar>
+              </div>
+
+              {/* unit pln */}
+              <div className="col-lg-6">
+                <h4 className="text-center">Unit PLN</h4>
+                <Bar data={unitPlnData} options={options}></Bar>
+              </div>
+            </div>
+
+            <div className="row p-3">
+
+              {/* peserta pensiun aktif */}
+              <div className="col-lg-6">
+                <h4 className="text-center">Peserta Pensiun Aktif</h4>
+                <Bar data={unitPlnData} options={options}></Bar>
+              </div>
+
+              {/* peserta pensiun non-aktif */}
+              <div className="col-lg-6">
+                <h4 className="text-center">Peserta Pensiun Non-Aktif</h4>
+                <Bar data={unitPlnData} options={options}></Bar>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { LinkS } from "../styles/LinkStyle";
 import Dropdown from "react-bootstrap/Dropdown";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
 
 export default function LaporanStatus() {
   const [pesertas, setPesertas] = useState([]);

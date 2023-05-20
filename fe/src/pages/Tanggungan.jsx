@@ -118,12 +118,12 @@ export default function Tanggungan() {
                     <td>{tanggungan.tgl_lahir}</td>
                     <td>{tanggungan.relasi}</td>
                     <td>
-                      <Link className="btn btn-primary m-2">Edit</Link>
+                      <Link className="btn btn-primary m-2">Ubah</Link>
                       <button
                         onClick={() => deleteTanggungan(tanggungan._id)}
                         className="btn btn-danger"
                       >
-                        Delete
+                        Hapus
                       </button>
                     </td>
                   </tr>
