@@ -18,6 +18,7 @@ import Sidebar from './components/Sidebar';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
 import LaporanStatus from './pages/LaporanStatus';
+import EditUnitPln from './pages/EditPages/EditUnitPln';
 
 function App() {
   return (
@@ -28,10 +29,17 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="signup" element = {<SignUp/>}/>
           <Route path="login" element = {<LogIn/>}/>
+
+          {/* peserta pensiun */}
           <Route path = "pesertapensiun" element = {<PesertaPensiun/>} />
           <Route path = "pesertapensiun/create" element = {<FormPesertaPensiun/>} />
+
+          {/* unit pln */}
           <Route path="unitpln" element={<UnitPln/>} />
           <Route path="unitpln/create" element={<FormCreateUnitPln/>} />
+          <Route path="unitpln/update/:id" element={<EditUnitPln/>} />
+
+
           <Route path="tanggungan" element = {<Tanggungan/>}/>
           <Route path= "tanggungan/create" element={<FormTanggungan/>} />
           <Route path= "registrasiulang" element= {<RegistrasiUlang/>} />
