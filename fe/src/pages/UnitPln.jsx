@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/NavBar";
+import NavBar from "../components/NavBar";
 import axios from "axios";
 import App from "../App";
 import Sidebar from "../components/Sidebar";
@@ -43,6 +43,11 @@ export default function UnitPln() {
   // };
   return (
     <>
+      <div className="row">
+        <div className="col-lg-12">
+          <NavBar />
+        </div>
+      </div>
       <div className="row flex-nowrap">
         <div className="bg-dark col-auto col-md-2 col-lg-2 min-vh-100 d-flex flex-column justify-content-between">
           <div className="bg-dark p-2">
@@ -164,8 +169,10 @@ export default function UnitPln() {
                       <td>{unit.kode_unit}</td>
                       <td>{unit.nama_unit}</td>
                       <td className="justify-content-center">
-                        <Link className="btn btn-primary m-2 fa-regular fa-pen-to-square"
-                        to = {`/unitpln/update/${unit._id}`}></Link>
+                        <Link
+                          className="btn btn-primary m-2 fa-regular fa-pen-to-square"
+                          to={`/unitpln/update/${unit._id}`}
+                        ></Link>
                         <button
                           onClick={() => deleteUnit(unit._id)}
                           className="btn btn-danger fa-solid fa-trash-can"

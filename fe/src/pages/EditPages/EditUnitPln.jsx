@@ -3,12 +3,12 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { LinkS } from "../../styles/LinkStyle";
+import NavBar from "../../components/NavBar";
 
 export default function EditUnitPln() {
   const { id } = useParams();
   const [kode_unit, setKodeUnit] = useState("");
   const [nama_unit, setNamaUnit] = useState("");
-  
 
   const navigate = useNavigate();
 
@@ -18,14 +18,33 @@ export default function EditUnitPln() {
 
   const getUnitsById = async () => {
     const response = await axios.get(
-      `http://localhost:3000/api/unitpln/update/${id}`
+      `http://localhost:3000/api/unitpln/${id}`
     );
     setKodeUnit(response.data.kode_unit);
     setNamaUnit(response.data.nama_unit);
   };
 
+  // edit
+  const updateUnit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:3000/api/unitpln/update/${id}`,{
+        kode_unit,
+        nama_unit
+      })
+      navigate("/unitpln");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
+      <div className="row">
+        <div className="col-lg-12">
+          <NavBar />
+        </div>
+      </div>
+
       <div className="row flex-nowrap">
         <div className="bg-dark col-auto col-md-2 col-lg-2 min-vh-100 d-flex flex-column justify-content-between">
           <div className="bg-dark p-2">
@@ -112,31 +131,32 @@ export default function EditUnitPln() {
           </div>
         </div>
 
-        <div className="form-row">
-          <div className="form-group col-lg-6 mb-2">
-            <form>
-              <label className="form-label fw-semibold">Kode Unit</label>
+        <div className="form-row ">
+          <h3 className="mt-4">Form Ubah Unit PLN</h3>
+          <div className="form-group col-lg-6 mt-5">
+            <form onSubmit={updateUnit}>
+              <h5 className="form-label fw-semibold">Kode Unit</h5>
 
               <input
                 type="text"
                 className="form-control"
                 value={kode_unit}
-                // onChange={(e) => setKodeUnit(e.target.value)}
+                onChange={(e) => setKodeUnit(e.target.value)}
               />
 
               <div className="form-group col-lg-6 mb-2"></div>
-              <label className="form-label fw-semibold">Nama Unit</label>
+              <h5 className="form-label fw-semibold">Nama Unit</h5>
 
               <input
                 type="text"
                 className="form-control"
                 value={nama_unit}
-                // onChange={(e) => setNamaUnit(e.target.value)}
+                onChange={(e) => setNamaUnit(e.target.value)}
               />
 
               <div className="field">
                 <button type="submit" className="btn btn-primary fw-semibold">
-                  Save
+                  Ubah
                 </button>
               </div>
             </form>
