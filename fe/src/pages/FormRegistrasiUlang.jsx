@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { LinkS } from "../styles/LinkStyle";
-import Form from "react-bootstrap/Form";
 
 export default function FormRegistrasiUlang() {
   const [nipen, setNipen] = useState("");
@@ -20,8 +19,6 @@ export default function FormRegistrasiUlang() {
       await axios.post("http://localhost:3000/api/registrasiulang/create", {
         nipen,
         nama_peserta,
-        ktpWajah,
-        ktp,
       });
       navigate("/registrasiulang");
     } catch (error) {
@@ -29,22 +26,31 @@ export default function FormRegistrasiUlang() {
     }
   };
 
-  const getPesertaByNip = async () => {
-    const response = await axios.get(
-      `http://localhost:3000/api/peserta/${nipen}`
-    );
-    setNamaPeserta(response.data[0].nama_peserta);
-    // setNip(response.data.nipen);
-  };
+  // const getPesertaByNip = async () => {
+  //   const response = await axios.get(
+  //     `http://localhost:3000/api/peserta/${nipen}`
+  //   );
+  //   setNamaPeserta(response.data[0].nama_peserta);
+  //   // setNip(response.data.nipen);
+  // };
 
-  const keyEnterHandler = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      console.log(nipen);
-      // console.log(getPesertaByNip);
-      getPesertaByNip();
-    }
-  };
+  // const keyEnterHandler = (e) => {
+  //   if (e.key === "Enter") {
+  //     e.preventDefault();
+  //     console.log(nipen);
+  //     // console.log(getPesertaByNip);
+  //     getPesertaByNip();
+  //   }
+  // };
+
+  // const handleKtpWajah = (e) => {
+  //   setFotoKtpWajah(e.target.files[2]);
+  // };
+
+  // const handleKtp = (e) => {
+  //   console.log(e.target.files[0]);
+  //   // setKtp(e.target.files[0]);
+  // };
 
   return (
     <React.Fragment>
@@ -156,7 +162,6 @@ export default function FormRegistrasiUlang() {
                 id="nip"
                 value={nipen}
                 onChange={(e) => setNipen(e.target.value)}
-                onKeyDown={keyEnterHandler}
                 placeholder="No Induk Pensiun"
               />
             </div>
@@ -174,7 +179,7 @@ export default function FormRegistrasiUlang() {
               />
             </div>
 
-            <div className="form-group col-lg-6 mb-2">
+            {/* <div className="form-group col-lg-6 mb-2">
               <label>
                 <strong>Upload Foto Wajah dan KTP</strong>
               </label>
@@ -198,14 +203,12 @@ export default function FormRegistrasiUlang() {
                 value={ktp}
                 onChange={(e) => setKtp(e.target.value)}
               />
-            </div>
-          </form>
+            </div> */}
 
-          <div className="field">
             <button type="submit" className="btn btn-primary fw-semibold">
               Simpan
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </React.Fragment>

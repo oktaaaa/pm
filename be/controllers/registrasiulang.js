@@ -20,7 +20,7 @@ class RegistrasiUlangController{
     static async getRegistrasiUlang(req, res){
         try{
             const registrasi = await RegistrasiUlang.find()
-            res.status(200).json(unit)
+            res.status(200).json(registrasi)
         }catch(error){
             res.status(500).json(error)
         }

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { LinkS } from "../styles/LinkStyle";
 import Dropdown from "react-bootstrap/Dropdown";
 
-export default function LaporanStatus() {
+export default function LaporanStatusAktif() {
   const [pesertas, setPesertas] = useState([]);
 
   useEffect(() => {
@@ -115,37 +115,17 @@ export default function LaporanStatus() {
         </div>
 
         {/* contents */}
-        <div className="col-lg-10 col-sm-1 col-md-1 mt-5 justify-center">
-          <h2 className="text-center">Laporan</h2>
-          <div className="row">
-            <div className="col-lg-2">
-              <h5>Pilih laporan:</h5>
-            </div>
+        <div className="col-lg-8 col-sm-1 col-md-1 mt-5 justify-center">
+          <h2 className="text-center mb-5">Laporan Peserta Aktif</h2>
 
-            <div className="col-lg-6">
-              <Dropdown className="p-2">
-                <Dropdown.Toggle id="dropdown-basic">Laporan</Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
-                    Laporan Peserta
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-1">
-                    Laporan Status Peserta{" "}
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          </div>
-
-          <table className="table is-striped table-bordered">
+          <table className="table is-striped table-bordered border-dark">
             <thead>
               <tr>
                 <th>No</th>
-
-                <th>NIPEN</th>
-                <th>Nama Peserta</th>
-
+                <th>NIK/NIPEN</th>
+                <th>Nama Lengkap</th>
+                <th>Penerima Manfaat Pensiun</th>
+                <th>Manfaat Pensiun</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -156,7 +136,9 @@ export default function LaporanStatus() {
                   <td>{index + 1}</td>
                   <td>{peserta.nipen}</td>
                   <td>{peserta.nama_peserta}</td>
-                  <td></td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
                 </tr>
               ))}
             </tbody>

@@ -148,7 +148,14 @@ export default function Laporan() {
             <Dropdown.Toggle id="dropdown-basic">Laporan</Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Laporan Peserta</Dropdown.Item>
+              <Dropdown.Item>
+                <Link
+                  to={`/laporanstatusaktif`}
+                  style={{ textDecoration: "none" }}
+                >
+                  Laporan Peserta Aktif{" "}
+                </Link>
+              </Dropdown.Item>
               <Dropdown.Item href="#/action-1">
                 Laporan Status Peserta{" "}
               </Dropdown.Item>

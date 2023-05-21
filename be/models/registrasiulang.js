@@ -3,21 +3,21 @@ const Schema = mongoose.Schema;
 
 const RegistrasiUlang = mongoose.model('RegistrasiUlang', {
     nipen:{
-        type: Schema.Types.ObjectId, ref: 'PesertaPensiun',
+        type: String,
         required:true
     },
     nama_peserta:{
         type: String,
         required:true
     },
-    ktpWajah:{
-        data: Buffer,
-        contentType: String
-    },
-    ktp:{
-        data: Buffer,
-        contentType: String
-    }
+    // ktpWajah:{
+    //     type: String,
+    //     required:true
+    // },
+    // ktp:{
+    //     type: String,
+    //     required:true
+    // }
 })
 
 module.exports = { RegistrasiUlang }

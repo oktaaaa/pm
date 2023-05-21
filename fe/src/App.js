@@ -17,7 +17,7 @@ import FormPesertaPensiun from './pages/FormPesertaPensiun';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
-import LaporanStatus from './pages/LaporanStatus';
+import LaporanStatusAktif from './pages/LaporanStatusAktif';
 import EditUnitPln from './pages/EditPages/EditUnitPln';
 
 function App() {
@@ -45,9 +45,11 @@ function App() {
 
           {/* registrasi */}
           <Route path= "registrasiulang" element= {<RegistrasiUlang/>} />
-          <Route path = "registrasiulang/create" element = {<FormRegistrasiUlang />} />
+          <Route path= "registrasiulang/create" element = {<FormRegistrasiUlang />} />
+
+
           <Route path= "laporan" element = {<Laporan />} />
-          <Route path= "laporanstatus" element = {<LaporanStatus />} />
+          <Route path= "laporanstatusaktif" element = {<LaporanStatusAktif />} />
         </Routes>
       <Footer/>
       

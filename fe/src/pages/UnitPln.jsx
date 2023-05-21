@@ -139,7 +139,6 @@ export default function UnitPln() {
             type=""
             className="form-control mb-3 border border-dark"
             placeholder="Ketik nama unit"
-            // value={kode_unit}
             onChange={(e) => setQuery(e.target.value)}
           />
           <div className="column">
