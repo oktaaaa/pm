@@ -7,6 +7,7 @@ import axios from "axios";
 import { Line, Bar } from "react-chartjs-2";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import NavBar from "../components/NavBar";
 import {
   Chart as ChartJS,
   BarElement,
@@ -87,6 +88,11 @@ const Dashboard = () => {
     <React.Fragment>
       <div className="row">
         <div className="col-lg-12">
+          <NavBar />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-12">
           <DropdownButton id="dropdown-basic-button" title="Hi, User">
             <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
             <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -155,7 +161,7 @@ const Dashboard = () => {
                   <i className="fa-solid fa-table-list fa-lg"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
                     <Link
-                      to={`/registrasiulang/add`}
+                      to={`/registrasiulang`}
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Registrasi Ulang
@@ -227,7 +233,6 @@ const Dashboard = () => {
 
           <div className="row m-3">
             <div className="row">
-
               {/* peserta pensiun */}
               <div className="col-lg-6">
                 <h4 className="text-center">Peserta Pensiun</h4>
@@ -242,7 +247,6 @@ const Dashboard = () => {
             </div>
 
             <div className="row p-3">
-
               {/* peserta pensiun aktif */}
               <div className="col-lg-6">
                 <h4 className="text-center">Peserta Pensiun Aktif</h4>

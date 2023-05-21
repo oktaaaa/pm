@@ -5,11 +5,47 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { LinkS } from "../styles/LinkStyle";
 import Form from "react-bootstrap/Form";
-import AsyncSelect from 'react-select/async';
 
 export default function FormRegistrasiUlang() {
-  //button
-  
+  const [nipen, setNipen] = useState("");
+  const [nama_peserta, setNamaPeserta] = useState("");
+  const [ktpWajah, setFotoKtpWajah] = useState("");
+  const [ktp, setKtp] = useState("");
+
+  const navigate = useNavigate();
+
+  const createRegistrasiUlang = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:3000/api/registrasiulang/create", {
+        nipen,
+        nama_peserta,
+        ktpWajah,
+        ktp,
+      });
+      navigate("/registrasiulang");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPesertaByNip = async () => {
+    const response = await axios.get(
+      `http://localhost:3000/api/peserta/${nipen}`
+    );
+    setNamaPeserta(response.data[0].nama_peserta);
+    // setNip(response.data.nipen);
+  };
+
+  const keyEnterHandler = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      console.log(nipen);
+      // console.log(getPesertaByNip);
+      getPesertaByNip();
+    }
+  };
+
   return (
     <React.Fragment>
       <div className="row">
@@ -78,7 +114,7 @@ export default function FormRegistrasiUlang() {
                   <i className="fa-solid fa-table-list fa-lg"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
                     <Link
-                      to={`/registrasiulang/add`}
+                      to={`/registrasiulang`}
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Registrasi Ulang
@@ -106,35 +142,64 @@ export default function FormRegistrasiUlang() {
 
         <div className="col-lg-8 col-md-8 p-5">
           <h2 className="mb-4">Registrasi Ulang</h2>
-          <Form>
-            <Form.Group className="mb-4">
-              <Form.Label>
+          <form onSubmit={createRegistrasiUlang}>
+            <div className="form-group col-lg-6 mb-2">
+              <label>
                 <strong>NIP</strong>
-              </Form.Label>
-              <Form.Control type="text" placeholder="Nomor Induk Pensiun" />
-            </Form.Group>
+              </label>
 
-            <Form.Group className="mb-4">
-              <Form.Label>
-                <strong>Nama Lengkap</strong>
-              </Form.Label>
-              <Form.Control type="text" />
-            </Form.Group>
+              {/* <p>Nip adalah {nip}</p> */}
 
-            <Form.Group className="mb-4">
-              <Form.Label>
+              <input
+                type="text"
+                className="form-control"
+                id="nip"
+                value={nipen}
+                onChange={(e) => setNipen(e.target.value)}
+                onKeyDown={keyEnterHandler}
+                placeholder="No Induk Pensiun"
+              />
+            </div>
+
+            <div className="form-group col-lg-6 mb-2">
+              <label>
+                <strong>Nama Peserta</strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="namaPegawai"
+                value={nama_peserta}
+                onChange={(e) => setNamaPeserta(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group col-lg-6 mb-2">
+              <label>
                 <strong>Upload Foto Wajah dan KTP</strong>
-              </Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                id="ktpWajah"
+                value={ktpWajah}
+                onChange={(e) => setFotoKtpWajah(e.target.value)}
+              />
+            </div>
 
-            <Form.Group className="mb-4">
-              <Form.Label>
+            <div className="form-group col-lg-6 mb-2">
+              <label>
                 <strong>Upload KTP</strong>
-              </Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
-          </Form>
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                id="ktp"
+                value={ktp}
+                onChange={(e) => setKtp(e.target.value)}
+              />
+            </div>
+          </form>
 
           <div className="field">
             <button type="submit" className="btn btn-primary fw-semibold">

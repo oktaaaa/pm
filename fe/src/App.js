@@ -42,6 +42,8 @@ function App() {
 
           <Route path="tanggungan" element = {<Tanggungan/>}/>
           <Route path= "tanggungan/create" element={<FormTanggungan/>} />
+
+          {/* registrasi */}
           <Route path= "registrasiulang" element= {<RegistrasiUlang/>} />
           <Route path = "registrasiulang/create" element = {<FormRegistrasiUlang />} />
           <Route path= "laporan" element = {<Laporan />} />

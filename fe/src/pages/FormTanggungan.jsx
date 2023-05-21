@@ -4,7 +4,6 @@ import axios from "axios";
 import Select from "react-crud-table/build/Select";
 import Navbar from "../components/NavBar";
 import { LinkS } from "../styles/LinkStyle";
-import { log } from "console";
 
 export default function FormTanggungan() {
   const [nipen, setNip] = useState("");
@@ -15,7 +14,6 @@ export default function FormTanggungan() {
   const [nama_tanggungan, setNamaTanggungan] = useState("");
   const [relasi, setRelations] = useState("");
 
-  const { id } = useParams();
   const navigate = useNavigate();
 
   //create tanggungan
