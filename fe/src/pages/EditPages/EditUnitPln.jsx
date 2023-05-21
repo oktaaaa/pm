@@ -1,4 +1,4 @@
-import  { React, useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { LinkS } from "../../styles/LinkStyle";
@@ -16,9 +16,7 @@ export default function EditUnitPln() {
   }, []);
 
   const getUnitsById = async () => {
-    const response = await axios.get(
-      `http://localhost:3000/api/unitpln/${id}`
-    );
+    const response = await axios.get(`http://localhost:3000/api/unitpln/${id}`);
     setKodeUnit(response.data.kode_unit);
     setNamaUnit(response.data.nama_unit);
   };
@@ -27,10 +25,10 @@ export default function EditUnitPln() {
   const updateUnit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/api/unitpln/update/${id}`,{
+      await axios.put(`http://localhost:3000/api/unitpln/update/${id}`, {
         kode_unit,
-        nama_unit
-      })
+        nama_unit,
+      });
       navigate("/unitpln");
     } catch (error) {
       console.log(error);
@@ -138,22 +136,21 @@ export default function EditUnitPln() {
 
               <input
                 type="text"
-                className="form-control"
+                className="form-control border border-dark"
                 value={kode_unit}
                 onChange={(e) => setKodeUnit(e.target.value)}
               />
 
-              <div className="form-group col-lg-6 mb-2"></div>
               <h5 className="form-label fw-semibold">Nama Unit</h5>
 
               <input
                 type="text"
-                className="form-control"
+                className="form-control border border-dark"
                 value={nama_unit}
                 onChange={(e) => setNamaUnit(e.target.value)}
               />
 
-              <div className="field">
+              <div className="field mt-3">
                 <button type="submit" className="btn btn-primary fw-semibold">
                   Ubah
                 </button>

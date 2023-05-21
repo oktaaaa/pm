@@ -18,6 +18,10 @@ const RegistrasiUlang = mongoose.model('RegistrasiUlang', {
     //     type: String,
     //     required:true
     // }
+    created_at:{
+        type: Date,
+        default: Date.now
+    }
 })
 
 module.exports = { RegistrasiUlang }

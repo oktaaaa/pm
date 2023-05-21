@@ -32,6 +32,8 @@ const Dashboard = () => {
   const [units, setUnit] = useState([]);
   const [pesertas, setPesertas] = useState([]);
   const [tanggungans, setTanggungans] = useState([]);
+  const [pesertaAktif, setPesertaAktif] = useState([]);
+  const [pesertaNonAktif, setPesertaNonAktif] = useState([]);
   const [chartData, setChartData] = useState({});
 
   const getPesertas = async () => {
@@ -41,12 +43,44 @@ const Dashboard = () => {
     setPesertas(response.data);
   };
 
+  // untuk peserta aktif
+  const getPesertaAktif = async () => {
+    const res = await axios.get("http://localhost:3000/api/registrasiulang");
+    setPesertaAktif(res.data);
+  };
+
   const unitPlnData = {
     labels: units.map((unit) => unit.nama_unit),
     datasets: [
       {
         label: "Unit PLN",
         data: [units.map((unit) => unit.nama_unit).length],
+        backgroundColor: "#1AA7EC",
+        borderColor: "black",
+        borderWidth: 1,
+      },
+    ],
+  };
+  const pesertaNonAktifData = {
+    labels: pesertaAktif.map((item) => item.created_at),
+    datasets: [
+      {
+        label: "Peserta Non Aktif",
+        data: [pesertaNonAktif],
+        backgroundColor: "#1AA7EC",
+        borderColor: "black",
+        borderWidth: 1,
+      },
+    ],
+  };
+  
+  
+  const pesertaAktifData = {
+    labels: pesertaAktif.map((item) => item.created_at),
+    datasets: [
+      {
+        label: "Peserta Aktif",
+        data: [pesertaAktif.length],
         backgroundColor: "#1AA7EC",
         borderColor: "black",
         borderWidth: 1,
@@ -72,8 +106,10 @@ const Dashboard = () => {
     getUnits();
     getPesertas();
     getTanggungans();
+    getPesertaAktif();
   }, []);
 
+  const persertaNonAktif = pesertas.length-pesertaAktif.length
   const getUnits = async () => {
     const response = await axios.get("http://localhost:3000/api/unitpln");
     setUnit(response.data);
@@ -216,7 +252,7 @@ const Dashboard = () => {
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Peserta Pensiun Aktif</h4>
-                  <h4 class="card-text"></h4>
+                  <h4 class="card-text">{pesertaAktif.length}</h4>
                 </div>
               </div>
             </div>
@@ -225,7 +261,7 @@ const Dashboard = () => {
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Peserta Pensiun Non-Aktif</h4>
-                  <h4 class="card-text"></h4>
+                  <h4 class="card-text">{persertaNonAktif}</h4>
                 </div>
               </div>
             </div>
@@ -250,13 +286,13 @@ const Dashboard = () => {
               {/* peserta pensiun aktif */}
               <div className="col-lg-6">
                 <h4 className="text-center">Peserta Pensiun Aktif</h4>
-                <Bar data={unitPlnData} options={options}></Bar>
+                <Bar data={pesertaAktifData} options={options}></Bar>
               </div>
 
               {/* peserta pensiun non-aktif */}
               <div className="col-lg-6">
                 <h4 className="text-center">Peserta Pensiun Non-Aktif</h4>
-                <Bar data={unitPlnData} options={options}></Bar>
+                <Bar data={pesertaNonAktifData} options={options}></Bar>
               </div>
             </div>
           </div>

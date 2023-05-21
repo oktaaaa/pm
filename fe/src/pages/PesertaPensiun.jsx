@@ -123,6 +123,7 @@ export default function PesertaPensiun() {
         </div>
 
         <div className="col-lg-10 col-sm-1 col-md-1 mt-5 justify-center">
+          <h2 className="mt-2 mb-4">Peserta Pensiun</h2>
           <input
             type=""
             className="form-control mb-3 border border-dark"
@@ -135,7 +136,7 @@ export default function PesertaPensiun() {
             <Link to={`create`} className="btn btn-primary">
               Tambah Baru
             </Link>
-            <table className="table is-striped table-bordered table-hover">
+            <table className="table is-striped table-bordered table-hover mt-3">
               <thead>
                 <tr>
                   <th>No</th>
@@ -174,13 +175,14 @@ export default function PesertaPensiun() {
                       <td>{peserta.besar_mp}</td>
                       <td>{peserta.unit_pln}</td>
                       <td>
-                        <Link className="btn btn-primary m-2">Ubah</Link>
+                        <Link
+                          className="btn btn-primary fa-regular fa-pen-to-square"
+                          to={`/pesertapensiun/update/${peserta._id}`}
+                        ></Link>
                         <button
                           onClick={() => deletePeserta(peserta._id)}
-                          className="btn btn-danger"
-                        >
-                          Hapus
-                        </button>
+                          className="btn btn-danger mx-2 fa-solid fa-trash-can"
+                        ></button>
                       </td>
                     </tr>
                   ))}

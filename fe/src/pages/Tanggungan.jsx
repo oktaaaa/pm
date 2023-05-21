@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import axios from "axios";
+import { LinkS } from "../styles/LinkStyle";
 
 export default function Tanggungan() {
   const [tanggungans, setTanggungans] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     getTanggungans();
@@ -38,9 +40,12 @@ export default function Tanggungan() {
             <ul className="nav nav-pills flex-column mt-5">
               <li className="nav-item py-2 py-sm-0">
                 <a className="nav-link text-white">
+                  {/* <i className="fs-5 fa fa-house"></i><span className="fs-4 ms-2 d-none d-sm-inline"><Link to = {`/dashboard`}><LinkS>Beranda</LinkS></Link></span> */}
                   <i className="fs-5 fa fa-house"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
-                    <Link to={`/dashboard`}>Beranda</Link>
+                    <LinkS className="" to="/dashboard">
+                      Dashboard
+                    </LinkS>
                   </span>
                 </a>
               </li>
@@ -48,7 +53,12 @@ export default function Tanggungan() {
                 <a className="nav-link text-white">
                   <i className="fa-solid fa-people-group fa-lg"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
-                    <Link to={`/pesertapensiun`}>Peserta Pensiun </Link>
+                    <Link
+                      to={`/pesertapensiun`}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Peserta Pensiun{" "}
+                    </Link>
                   </span>
                 </a>
               </li>
@@ -56,7 +66,12 @@ export default function Tanggungan() {
                 <a className="nav-link text-white">
                   <i className="fa-solid fa-people-roof fa-lg"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
-                    <Link to={`/tanggungan`}>Tanggungan</Link>
+                    <Link
+                      to={`/tanggungan`}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Tanggungan
+                    </Link>
                   </span>
                 </a>
               </li>
@@ -64,7 +79,12 @@ export default function Tanggungan() {
                 <a className="nav-link text-white">
                   <i className="fa-solid fa-building fa-xl"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
-                    <Link to={`/unitpln`}>Unit PLN</Link>
+                    <Link
+                      to={`/unitpln`}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Unit PLN
+                    </Link>
                   </span>
                 </a>
               </li>
@@ -73,7 +93,12 @@ export default function Tanggungan() {
                 <a className="nav-link text-white">
                   <i className="fa-solid fa-table-list fa-lg"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
-                    Registrasi Ulang
+                    <Link
+                      to={`/registrasiulang`}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Registrasi Ulang
+                    </Link>
                   </span>
                 </a>
               </li>
@@ -81,7 +106,14 @@ export default function Tanggungan() {
               <li className="nav-item py-2 py-sm-0">
                 <a className="nav-link text-white">
                   <i className="fa-solid fa-file-lines fa-xl"></i>
-                  <span className="fs-4 ms-2 d-none d-sm-inline">Laporan</span>
+                  <span className="fs-4 ms-2 d-none d-sm-inline">
+                    <Link
+                      to={`/laporan`}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Laporan
+                    </Link>
+                  </span>
                 </a>
               </li>
             </ul>
@@ -89,13 +121,20 @@ export default function Tanggungan() {
         </div>
 
         <div className="col-lg-8 col-sm-1 col-md-1 mt-5 justify-center">
+          <h2>Tanggungan</h2>
+          <input
+            type=""
+            className="form-control mb-3 border border-dark"
+            placeholder="Ketik nama peserta"
+            onChange={(e) => setQuery(e.target.value)}
+          />
           <div className="column">
             <Link to={`create`} className="btn btn-primary">
               Add New
             </Link>
-            <table className="table is-striped table-bordered">
+            <table className="table is-striped table-bordered mt-5 border border-dark">
               <thead>
-                <tr>
+                <tr className="text-center">
                   <th>Id</th>
                   <th>NIP</th>
                   <th>Nama Peserta Pensiun</th>
@@ -108,26 +147,31 @@ export default function Tanggungan() {
               </thead>
 
               <tbody>
-                {tanggungans.map((tanggungan, index) => (
-                  <tr key={tanggungan._id}>
-                    <td>{index + 1}</td>
-                    <td>{tanggungan.nipen}</td>
-                    <td>{tanggungan.nama_peserta}</td>
-                    <td>{tanggungan.nik_tanggungan}</td>
-                    <td>{tanggungan.nama_tanggungan}</td>
-                    <td>{tanggungan.tgl_lahir}</td>
-                    <td>{tanggungan.relasi}</td>
-                    <td>
-                      <Link className="btn btn-primary m-2">Ubah</Link>
-                      <button
-                        onClick={() => deleteTanggungan(tanggungan._id)}
-                        className="btn btn-danger"
-                      >
-                        Hapus
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {tanggungans
+                  .filter((tanggungan) =>
+                    tanggungan.nama_peserta.toLowerCase().includes(query)
+                  )
+                  .map((tanggungan, index) => (
+                    <tr key={tanggungan._id}>
+                      <td>{index + 1}</td>
+                      <td>{tanggungan.nipen}</td>
+                      <td>{tanggungan.nama_peserta}</td>
+                      <td>{tanggungan.nik_tanggungan}</td>
+                      <td>{tanggungan.nama_tanggungan}</td>
+                      <td>{tanggungan.tgl_lahir}</td>
+                      <td>{tanggungan.relasi}</td>
+                      <td>
+                        <Link
+                          className="btn btn-primary mx-4 fa-regular fa-pen-to-square"
+                          to={`/tanggungan/update/${tanggungan._id}`}
+                        ></Link>
+                        <button
+                          onClick={() => deleteTanggungan(tanggungan._id)}
+                          className="btn btn-danger fa-solid fa-trash-can"
+                        ></button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

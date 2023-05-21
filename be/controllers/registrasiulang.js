@@ -5,8 +5,9 @@ class RegistrasiUlangController{
         const registrasiulang = new RegistrasiUlang({
             nipen: req.body.nipen,
             nama_peserta: req.body.nama_peserta,
-            ktpWajah: req.body.ktpWajah,
-            ktp: req.body.ktp
+            // ktpWajah: req.body.ktpWajah,
+            // ktp: req.body.ktp
+            created_at:req.body.created_at
         })
 
         try{
@@ -24,6 +25,19 @@ class RegistrasiUlangController{
         }catch(error){
             res.status(500).json(error)
         }
+    }
+
+    static async deleteRegistrasiUlang(req, res){
+        try{
+            const regUlang = await RegistrasiUlang.findByIdAndRemove(req.params.id)
+            res.status(200).json({
+                message: "Registrasi Deleted"
+            })
+            
+        } catch(error){
+            res.status(500).json(error)
+        }
+       
     }
 }
 

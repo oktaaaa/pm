@@ -66,7 +66,7 @@ export default function FormTanggungan() {
   };
 
   return (
-    <>
+    <React.Fragment>
       <div className="row">
         <div className="col-lg-12">
           <Navbar />
@@ -133,7 +133,7 @@ export default function FormTanggungan() {
                   <i className="fa-solid fa-table-list fa-lg"></i>
                   <span className="fs-4 ms-2 d-none d-sm-inline">
                     <Link
-                      to={`/registrasiulang/add`}
+                      to={`/registrasiulang`}
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Registrasi Ulang
@@ -160,7 +160,7 @@ export default function FormTanggungan() {
         </div>
 
         <div className="col-lg-8 col-md-8 p-5">
-          <h2 className="mb-4">Form Tambah Data Tanggungan</h2>
+          <h2 className="mb-4">Tambah Data Tanggungan</h2>
           <form onSubmit={createTanggungan}>
             <h4 className="mb-2">Cari NIP/Nama Pegawai</h4>
 
@@ -246,7 +246,6 @@ export default function FormTanggungan() {
                     </option>
                   ))}
                 </select>
-                <p>The relation is {relasi}</p>
               </div>
             </div>
 
@@ -256,6 +255,6 @@ export default function FormTanggungan() {
           </form>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }

@@ -37,5 +37,5 @@ routes.delete('/api/tanggungan/:id', TanggunganController.deleteTanggungan)
 //registrasi ulang
 routes.post('/api/registrasiulang/create', RegistrasiUlangController.createRegistrasiUlang)
 routes.get('/api/registrasiulang', RegistrasiUlangController.getRegistrasiUlang)
-
+routes.delete('api/registrasiulang/:id', RegistrasiUlangController.deleteRegistrasiUlang)
 module.exports = routes

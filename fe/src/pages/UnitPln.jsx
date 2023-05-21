@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactFragment } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import axios from "axios";
 import App from "../App";
 import Sidebar from "../components/Sidebar";
 import { LinkS } from "../styles/LinkStyle";
-import { log } from "console";
 
 export default function UnitPln() {
   const [units, setUnit] = useState([]);
@@ -42,7 +41,7 @@ export default function UnitPln() {
   //   }
   // };
   return (
-    <>
+    <React.Fragment>
       <div className="row">
         <div className="col-lg-12">
           <NavBar />
@@ -135,6 +134,7 @@ export default function UnitPln() {
         </div>
 
         <div className="col-lg-8 col-sm-1 col-md-1 mt-5 justify-center">
+          <h2>Unit PLN</h2>
           <input
             type=""
             className="form-control mb-3 border border-dark"
@@ -169,7 +169,7 @@ export default function UnitPln() {
                       <td>{unit.nama_unit}</td>
                       <td className="justify-content-center">
                         <Link
-                          className="btn btn-primary m-2 fa-regular fa-pen-to-square"
+                          className="btn btn-primary mx-4 fa-regular fa-pen-to-square"
                           to={`/unitpln/update/${unit._id}`}
                         ></Link>
                         <button
@@ -184,6 +184,6 @@ export default function UnitPln() {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }

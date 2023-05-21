@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/NavBar";
+import NavBar from "../components/NavBar";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { LinkS } from "../styles/LinkStyle";
@@ -26,6 +26,12 @@ export default function FormCreateUnitPln() {
 
   return (
     <>
+      <div className="row">
+        <div className="col-lg-12">
+          <NavBar />
+        </div>
+      </div>
+
       <div className="row flex-nowrap">
         <div className="bg-dark col-auto col-md-2 col-lg-2 min-vh-100 d-flex flex-column justify-content-between">
           <div className="bg-dark p-2">
@@ -114,29 +120,32 @@ export default function FormCreateUnitPln() {
 
         <div className="form-row">
           <div className="form-group col-lg-6 mb-2">
+            <h2>Tambah Unit PLN</h2>
             <form onSubmit={createUnit}>
               <label className="form-label fw-semibold">Kode Unit</label>
 
               <input
                 type="text"
-                className="form-control"
+                className="form-control border border-dark"
                 value={kode_unit}
                 onChange={(e) => setKodeUnit(e.target.value)}
               />
 
-              <div className="form-group col-lg-6 mb-2"></div>
               <label className="form-label fw-semibold">Nama Unit</label>
 
               <input
                 type="text"
-                className="form-control"
+                className="form-control border border-dark"
                 value={nama_unit}
                 onChange={(e) => setNamaUnit(e.target.value)}
               />
 
               <div className="field">
-                <button type="submit" className="btn btn-primary fw-semibold">
-                  Save
+                <button
+                  type="submit"
+                  className="btn btn-primary fw-semibold mt-3"
+                >
+                  Simpan
                 </button>
               </div>
             </form>

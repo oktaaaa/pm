@@ -126,21 +126,28 @@ export default function LaporanStatusAktif() {
                 <th>Nama Lengkap</th>
                 <th>Penerima Manfaat Pensiun</th>
                 <th>Manfaat Pensiun</th>
-                <th>Status</th>
+                
               </tr>
             </thead>
 
             <tbody>
-              {pesertas.map((peserta, index) => (
-                <tr key={peserta._id}>
-                  <td>{index + 1}</td>
-                  <td>{peserta.nipen}</td>
-                  <td>{peserta.nama_peserta}</td>
-                  <td>...</td>
-                  <td>...</td>
-                  <td>...</td>
+              
+                <tr>
+                  <td>1</td>
+                  <td>123</td>
+                  <td>ole</td>
+                  <td>ole</td>
+                  <td>2000000</td>
                 </tr>
-              ))}
+
+                <tr>
+                  <td>2</td>
+                  <td>124</td>
+                  <td>oke</td>
+                  <td>oke</td>
+                  <td>2000000</td>
+                </tr>
+            
             </tbody>
           </table>
         </div>
